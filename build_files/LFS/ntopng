@@ -1,0 +1,108 @@
+###############################################################################
+#                                                                             #
+# IPFire.org - A linux based firewall                                         #
+# Copyright (C) 2017  IPFire Team  <info@ipfire.org>                          #
+#                                                                             #
+# This program is free software: you can redistribute it and/or modify        #
+# it under the terms of the GNU General Public License as published by        #
+# the Free Software Foundation, either version 3 of the License, or           #
+# (at your option) any later version.                                         #
+#                                                                             #
+# This program is distributed in the hope that it will be useful,             #
+# but WITHOUT ANY WARRANTY; without even the implied warranty of              #
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the               #
+# GNU General Public License for more details.                                #
+#                                                                             #
+# You should have received a copy of the GNU General Public License           #
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.       #
+#                                                                             #
+###############################################################################
+
+###############################################################################
+# Definitions
+###############################################################################
+
+include Config
+
+VER        = 3.0
+
+THISAPP    = ntopng-$(VER)
+DL_FILE    = $(THISAPP).tar.gz
+DL_FROM    = $(URL_IPFIRE)
+DIR_APP    = $(DIR_SRC)/$(THISAPP)
+TARGET     = $(DIR_INFO)/$(THISAPP)
+PROG       = ntopng
+PAK_VER    = 1
+
+DEPS       = "redis"
+
+###############################################################################
+# Top-level Rules
+###############################################################################
+
+objects = $(DL_FILE)
+
+$(DL_FILE) = $(DL_FROM)/$(DL_FILE)
+nDPI-2.1.0	= 0dfa6db4bbc4293b11fb656fc0d79913
+$(DL_FILE)_MD5 	= b994c0d42cedfd131f8bdc3b7e80ad64
+
+install : $(TARGET)
+
+check : $(patsubst %,$(DIR_CHK)/%,$(objects))
+
+download :$(patsubst %,$(DIR_DL)/%,$(objects))
+
+md5 : $(subst %,%_MD5,$(objects))
+
+dist: 
+	@$(PAK)
+
+###############################################################################
+# Downloading, checking, md5sum
+###############################################################################
+
+$(patsubst %,$(DIR_CHK)/%,$(objects)) :
+	@$(CHECK)
+
+$(patsubst %,$(DIR_DL)/%,$(objects)) :
+	@$(LOAD)
+
+$(subst %,%_MD5,$(objects)) :
+	@$(MD5)
+
+###############################################################################
+# Installation Details
+###############################################################################
+
+$(TARGET) : $(patsubst %,$(DIR_DL)/%,$(objects))
+	@$(PREBUILD)
+	# build nDPI
+	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/nDPI-2.1.0.tar.gz
+	cd $(DIR_SRC)/nDPI && ./autogen.sh
+	cd $(DIR_SRC)/nDPI && ./configure	\
+		--prefix=/usr			\
+		--enable-json-c
+	cd $(DIR_SRC)/nDPI && make $(MAKETUNING)
+
+	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/$(DL_FILE)
+	cd $(DIR_SRC)/ntopng && ./autogen.sh
+	cd $(DIR_SRC)/ntopng && ./configure 	\
+		--prefix=/usr			\
+		--sysconfdir=/etc		\
+		--localstatedir=/var		\
+		--datadir=/var/nst/ntopng
+
+	cd $(DIR_SRC)/ntopng && make $(MAKETUNING)
+	cd $(DIR_SRC)/ntopng && make install
+
+	# Add configuration and data dir
+	-mkdir -v /etc/ntopng
+	-mkdir -pv /var/nst/ntopng
+	chown -R nobody:nobody /var/nst
+	cd $(DIR_CONF)/ntopng && install -v -m750 ntopng.conf /etc/ntopng/ntopng.conf
+	cd $(DIR_CONF)/ntopng && install -v -m754 ntopng.init /etc/rc.d/init.d/ntopng
+
+	@rm -rf $(DIR_SRC)/nDPI
+	@rm -rf $(DIR_SRC)/ntopng
+	@$(POSTBUILD)
+
