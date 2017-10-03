@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash -
 
 #
 # Cronjob script to update GeoIP for ntopng periodically
