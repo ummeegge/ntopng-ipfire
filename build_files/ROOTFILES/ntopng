@@ -2,15 +2,6 @@
 etc/ntopng/ntopng.conf
 etc/rc.d/init.d/ntopng
 usr/bin/ntopng
-#usr/include/libndpi-2.1.0
-#usr/include/libndpi-2.1.0/libndpi
-#usr/include/libndpi-2.1.0/libndpi/ndpi_api.h
-#usr/include/libndpi-2.1.0/libndpi/ndpi_define.h
-#usr/include/libndpi-2.1.0/libndpi/ndpi_includes.h
-#usr/include/libndpi-2.1.0/libndpi/ndpi_main.h
-#usr/include/libndpi-2.1.0/libndpi/ndpi_protocol_ids.h
-#usr/include/libndpi-2.1.0/libndpi/ndpi_protocols.h
-#usr/include/libndpi-2.1.0/libndpi/ndpi_typedefs.h
 #usr/man/man8/ntopng.8
 #usr/share/ntopng
 #usr/share/ntopng/httpdocs
