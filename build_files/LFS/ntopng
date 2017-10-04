@@ -99,8 +99,10 @@ $(TARGET) : $(patsubst %,$(DIR_DL)/%,$(objects))
 	-mkdir -pv /etc/ntopng/scripts
 	-mkdir -pv /var/nst/ntopng
 	cd $(DIR_CONF)/ntopng && install -v -m750 ntopng.conf /etc/ntopng/ntopng.conf
-	cd $(DIR_CONF)/ntopng && install -v -m754 ntopng.init /etc/rc.d/init.d/ntopng
+	cd $(DIR_CONF)/ntopng && install -v -m750 protos.txt /etc/ntopng/scripts/protos.txt
 	cd $(DIR_CONF)/ntopng && install -v -m750 geoip_updater.sh /etc/ntopng/scripts/geoip_updater.sh
+	cd $(DIR_CONF)/ntopng && install -v -m754 ntopng.init /etc/rc.d/init.d/ntopng
+
 
 	@rm -rf $(DIR_SRC)/nDPI
 	@rm -rf $(DIR_SRC)/ntopng

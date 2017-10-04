@@ -1,0 +1,23 @@
+#  Format:                         
+#  <tcp|udp>:<port>,<tcp|udp>:<port>,.....@<proto>                     
+
+tcp:81,tcp:8181@HTTP               
+udp:5061-5062@SIP                  
+tcp:860,udp:860,tcp:3260,udp:3260@iSCSI                                
+tcp:3000,tcp3001@ntop                      
+tcp:800@SquidProxy
+tcp:222,tcp:22@SSH
+udp:1194@OpenVPN
+tcp:444@IPFire_WUI
+
+#  Subprotocols                    
+#  Format:                         
+#  host:"<value>",host:"<value>",.....@<subproto>                      
+
+host:"googlesyndacation.com"@Google                                    
+host:"venere.com"@Venere           
+host:"kataweb.it",host:"repubblica.it"@Repubblica                              
+host:"facebook.com"@Facebook       
+host:"youtube.com"@YouTube         
+host:"github.com"@Github           
+host:"ipfire.org"@IPFire
