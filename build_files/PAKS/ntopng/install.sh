@@ -57,7 +57,7 @@ else
     seperator;
 fi
 # Change permissions for work dir
-chown -R ${NAME}:${NAME} /var/nst;
+chown -R ${NAME}:${NAME} /var/nst /etc/ntopng/scripts/protos.txt;
 # Add user to ntopng.conf
 if ! grep -q "\-\-user ${NAME}" ${CONF}; then
     cat >> ${CONF} <<"EOF"
@@ -110,11 +110,11 @@ seperator;
 ADDRESSES=$(netstat -r | awk '/red/||/green/||/blue/||/orange/ { if ($1 ~ /^[1-9]/) print $1"/"$3}' | tr '\n' ',' | head -c-1);
 # Investigate existing interfaces
 INTERFACE=$(for i in $(ifconfig | awk '/green/ || /blue/ || /orange/ || /ppp/ || /red/ || /tun/ { print $1 }'); do
-	echo "--interface ${i}";
+    echo "--interface ${i}";
 done)
 # Paste investigated networks into ntopng.conf if no entries exist
 if ! grep -q "# Local Networks:" ${CONF}; then
-	cat >> ${CONF} <<EOF
+    cat >> ${CONF} <<EOF
 
 #
 # Local Networks:
@@ -125,14 +125,14 @@ $(echo "--local-networks ${ADDRESSES}")
 EOF
 
 else
-	echo "There are already entries for your '--local-networks'. Please check it by your own under ${CONF}... ";
+    echo "There are already entries for your '--local-networks'. Please check it by your own under ${CONF}... ";
 fi
 # Paste investigated subnets into ntopng.conf if no entries exist
 echo
 echo "${Y}Add interfaces to ntopng configuration file${N}";
 seperator;
 if ! grep -q "# Network Interface(s):" ${CONF}; then
-	cat >> ${CONF} <<EOF
+    cat >> ${CONF} <<EOF
 
 #
 # Network Interface(s):
@@ -144,7 +144,7 @@ ${INTERFACE}
 EOF
 
 else
-	echo "There are already entries for your '--interface'. Please check it by your own under ${CONF}... ";
+    echo "There are already entries for your '--interface'. Please check it by your own under ${CONF}... ";
 fi
 
 ## Thanks gocart ;-)
@@ -185,7 +185,7 @@ if ! pgrep redis >/dev/null; then
             /etc/init.d/ntopng start;
             seperator;
         else
-            echo "${R}Have a roblem to start Redis, need to quit... ${N}";
+            echo "${R}Have a problem to start Redis, need to quit... ${N}";
         fi
     else
         echo;

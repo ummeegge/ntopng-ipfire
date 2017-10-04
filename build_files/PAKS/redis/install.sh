@@ -43,5 +43,7 @@ ln -s ../init.d/${NAME} /etc/rc.d/rc0.d/K${STOP}${NAME};
 ln -s ../init.d/${NAME} /etc/rc.d/rc3.d/S${START}${NAME};
 ln -s ../init.d/${NAME} /etc/rc.d/rc6.d/K${REBOOT}${NAME};
 
+# Start redis
+/etc/init.d/${NAME} start;
 
 # EOF
