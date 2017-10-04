@@ -27,6 +27,10 @@ CONF="/etc/ntopng/ntopng.conf";
 SSL="/usr/share/ntopng/httpdocs/ssl";
 SETTINGS="/var/ipfire/ethernet/settings";
 
+if pidof -x "ntopng" >/dev/null; then
+    /etc/init.d/ntopng stop;
+fi
+
 extract_files
 restore_backup ${NAME}
 
@@ -39,6 +43,38 @@ N=$(tput sgr0);
 seperator(){ printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -; };
 
 clear;
+
+# Add user and group for ntopng if not already done
+if ! grep -q "${NAME}" /etc/passwd; then
+    groupadd ${NAME};
+    useradd -g ${NAME} -d /var/nst/ -s /sbin/nologin ${NAME};
+    echo;
+    echo "${Y}Have add user and group 'ntopng'${N}";
+    seperator;
+else
+    echo;
+    echo "User already presant leave it as it is";
+    seperator;
+fi
+# Change permissions for work dir
+chown -R ${NAME}:${NAME} /var/nst;
+# Add user to ntopng.conf
+if ! grep -q "\-\-user ${NAME}" ${CONF}; then
+    cat >> ${CONF} <<"EOF"
+
+#
+# Ntopng User:
+# ====== =====
+--user ntopng
+EOF
+    echo;
+    echo "${Y}Have added user into ${CONF}${N}";
+    seperator;
+else
+    echo;
+    echo "${Y}User is already presant will leave it as it is... ";
+    seperator;
+fi
 
 # Delete old symlink if presant
 rm -rfv /etc/rc.d/rc?.d/???${NAME};
@@ -71,7 +107,7 @@ paxctl -pemrxs /usr/bin/ntopng 2>/dev/null;
 echo;
 echo "${Y}Add subnets to ntopng configuration file${N}";
 seperator;
-ADDRESSES=$(netstat -r | awk '/red/||/green/||/blue/||/orange/ { if ($1 ~ /^[0-9]/) print $1"/"$3}' | tr '\n' ',' | head -c-1);
+ADDRESSES=$(netstat -r | awk '/red/||/green/||/blue/||/orange/ { if ($1 ~ /^[1-9]/) print $1"/"$3}' | tr '\n' ',' | head -c-1);
 # Investigate existing interfaces
 INTERFACE=$(for i in $(ifconfig | awk '/green/ || /blue/ || /orange/ || /ppp/ || /red/ || /tun/ { print $1 }'); do
 	echo "--interface ${i}";
@@ -113,30 +149,62 @@ fi
 
 ## Thanks gocart ;-)
 # create https cert
-echo;
-echo "${Y}Create certificate for HTTPS support... ${N}";
-seperator;
-/usr/bin/openssl genrsa -out rsa.key 4096;
-/bin/cat /etc/certparams | sed "s/HOSTNAME/`hostname -f`/" | /usr/bin/openssl req -new -key rsa.key -out rsa.csr 2>/dev/null;
-/usr/bin/openssl x509 -req -days 1825 -sha256 -in rsa.csr -signkey rsa.key -out rsa.crt 2>/dev/null;
-cat rsa.key rsa.crt > ${SSL}/ntopng-cert.pem
-rm -f rsa.key rsa.crt rsa.csr;
+if ls ${SSL} | grep -q 'ntopng-cert.pem$'; then
+    echo "There is already an certificate presant under ${SSL}, won´t change this... ";
+else
+    echo;
+    echo "${Y}Create certificate for HTTPS support... ${N}";
+    seperator;
+    /usr/bin/openssl genrsa -out rsa.key 4096;
+    /bin/cat /etc/certparams | sed "s/HOSTNAME/`hostname -f`/" | /usr/bin/openssl req -new -key rsa.key -out rsa.csr 2>/dev/null;
+    /usr/bin/openssl x509 -req -days 1825 -sha256 -in rsa.csr -signkey rsa.key -out rsa.crt 2>/dev/null;
+    cat rsa.key rsa.crt > ${SSL}/ntopng-cert.pem
+    rm -f rsa.key rsa.crt rsa.csr;
+fi
+
 # Investigate and add green interface to webinterface access
 echo;
 echo "${Y}Set HTTPS access from green interface only to ntopng WI... ${N}";
 seperator;
-HTTPSPORT=$(awk -F'=' '/GREEN_ADDRESS/ { print"--https-port " $2":"3001 }' ${SETTINGS});
-sed -i "s/--http-port.*/${HTTPSPORT}/" ${CONF};
+if ! grep -q "\-\-https-port.*:3001" ${CONF}; then
+    HTTPSPORT=$(awk -F'=' '/GREEN_ADDRESS/ { print"--https-port " $2":"3001 }' ${SETTINGS});
+    sed -i "s/--http-port.*/${HTTPSPORT}/" ${CONF};
+else
+    echo "HTTPS port $(grep '\-\-https-port' ${CONF}) is already set, leave my bits out of this, please do this by yourself if nesessary .-)... ";
+fi
+# Check if redis-server is already running
+if ! pgrep redis >/dev/null; then
+    echo;
+    echo "Redis server needs to be active, will start it for you if possible... ";
+    if ls /etc/rc.d/init.d/ | grep -q 'redis'; then
+        /etc/init.d/redis start;
+        if pidof -x "redis-server" >/dev/null; then
+            echo "OK Redis-Server has been started";
+            echo;
+            echo "${Y}Will start now ntopng... ${N}";
+            /etc/init.d/ntopng start;
+            seperator;
+        else
+            echo "${R}Have a roblem to start Redis, need to quit... ${N}";
+        fi
+    else
+        echo;
+        echo "${R}Redis seems to be not installed on this system, please install it first... ${N}";
+        echo "Need to quit";
+        exit 1;
+    fi
+else
+    echo;
+    echo "${Y}Will start now ntopng... ${N}";
+    /etc/init.d/ntopng start;
+    seperator;
+fi
 
-echo;
-echo "${Y}Will start now ntopng... ${N}";
-seperator;
-/etc/init.d/ntopng start
-
+# Check if cative and deliver address, otherwise throw a warning
 if pidof -x "ntopng" >/dev/null; then
     echo;
     seperator;
-    echo "You can reach ntopngs web interface over ${B}'$(awk -F'=' '/GREEN_ADDRESS/ { print"https://"$2":"3001 }' ${SETTINGS})'${N}";
+    echo "You can reach ntopngs web interface over ${B}'$(awk '/https/ { print "https://"$2 }' ${CONF})'${N}";
     seperator;
     echo;
 else

@@ -1,5 +1,7 @@
 #etc/ntopng
 etc/ntopng/ntopng.conf
+#etc/ntopng/scripts
+etc/ntopng/scripts/geoip_updater.sh
 etc/rc.d/init.d/ntopng
 usr/bin/ntopng
 #usr/man/man8/ntopng.8

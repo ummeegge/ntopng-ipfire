@@ -22,38 +22,6 @@
 ############################################################################
 #
 . /opt/pakfire/lib/functions.sh
-NAME="ntopng";
-#stop_service ${NAME}
-#extract_backup_includes
-#make_backup ${NAME}
-remove_files
+extract_files
+restore_backup ${NAME}
 
-# Stop processes
-if pidof -x "ntopng" >/dev/null; then
-    /etc/init.d/ntopng stop;
-fi
-if pidof -x "redis-server" >/dev/null; then
-    /etc/init.d/redis stop;
-fi
-
-# Delete files
-rm -rvf \
-/etc/ntopng \
-/etc/rc.d/init.d/ntopng \
-/usr/bin/ntopng \
-/usr/share/ntopng \
-/var/nst \
-/var/tmp/ntopng
-
-# Delete old symlink if presant
-rm -rfv /etc/rc.d/rc?.d/???${NAME};
-
-if grep -q "${NAME}" /etc/passwd; then
-	userdel ${NAME};
-	groupdel ${NAME};
-	echo "Have deleted group and user 'ntopng'... ";
-fi
-
-/etc/init.d/redis start;
-
-# EOF
