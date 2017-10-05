@@ -57,7 +57,8 @@ else
     seperator;
 fi
 # Change permissions for work dir
-chown -R ${NAME}:${NAME} /var/nst /etc/ntopng/scripts/protos.txt;
+chown -R ${NAME}:${NAME} /var/nst;
+chown root:${NAME} /etc/ntopng/scripts/protos.txt;
 # Add user to ntopng.conf
 if ! grep -q "\-\-user ${NAME}" ${CONF}; then
     cat >> ${CONF} <<"EOF"
@@ -77,7 +78,12 @@ else
 fi
 
 # Delete old symlink if presant
-rm -rfv /etc/rc.d/rc?.d/???${NAME};
+if ls /etc/rc.d/rc0.d/ | grep -q "${NAME}"; then
+    echo;
+    echo "${Y}Have found old symlinks, will delete them${N}"
+    seperator;
+    rm -rf /etc/rc.d/rc?.d/???${NAME};
+fi
 
 ## Add symlinks
 # Possible runlevel ranges

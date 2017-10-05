@@ -36,7 +36,8 @@ rm -rfv \
 /etc/rc.d/init.d/redis \
 /etc/redis \
 /usr/bin/redis-* \
-/var/lib/redis
+/var/lib/redis \
+/var/log/redis
 
 # Delete old symlink if presant
 rm -rfv /etc/rc.d/rc?.d/???${NAME};

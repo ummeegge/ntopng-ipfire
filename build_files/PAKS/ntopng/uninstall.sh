@@ -54,6 +54,9 @@ if grep -q "${NAME}" /etc/passwd; then
 	echo "Have deleted group and user 'ntopng'... ";
 fi
 
-/etc/init.d/redis start;
+# Check if Redis-Server is still there, if yes start it again
+if ls /etc/rc.d/init.d/ | grep -q "redis"; then
+	/etc/init.d/redis start;
+fi
 
 # EOF
