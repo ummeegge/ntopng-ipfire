@@ -24,9 +24,9 @@
 . /opt/pakfire/lib/functions.sh
 NAME="redis";
 stop_service ${NAME}
-extract_backup_includes
-make_backup ${NAME}
-remove_files
+#extract_backup_includes
+#make_backup ${NAME}
+#remove_files
 
 /etc/init.d/${NAME} stop;
 
@@ -36,7 +36,7 @@ rm -rfv \
 /etc/rc.d/init.d/redis \
 /etc/redis \
 /usr/bin/redis-* \
-/var/lib/redis \
+/var/redis \
 /var/log/redis
 
 # Delete old symlink if presant

@@ -79,7 +79,7 @@ $(TARGET) : $(patsubst %,$(DIR_DL)/%,$(objects))
 	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/$(DL_FILE)
 	cd $(DIR_APP) && patch -Np1 < $(DIR_SRC)/src/patches/redis-4.0.2_install-dir.patch
 
-	-mkdir -pv /var/lib/redis
+	-mkdir -pv /var/redis/6379
 	-mkdir -v /var/log/redis
 	-mkdir -v /etc/redis
 

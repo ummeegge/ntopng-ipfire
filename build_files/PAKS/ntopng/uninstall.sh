@@ -26,7 +26,7 @@ NAME="ntopng";
 #stop_service ${NAME}
 #extract_backup_includes
 #make_backup ${NAME}
-remove_files
+#remove_files
 
 # Stop processes
 if pidof -x "ntopng" >/dev/null; then
