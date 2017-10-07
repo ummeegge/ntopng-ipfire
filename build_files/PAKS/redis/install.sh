@@ -43,6 +43,16 @@ ln -s ../init.d/${NAME} /etc/rc.d/rc0.d/K${STOP}${NAME};
 ln -s ../init.d/${NAME} /etc/rc.d/rc3.d/S${START}${NAME};
 ln -s ../init.d/${NAME} /etc/rc.d/rc6.d/K${REBOOT}${NAME};
 
+# Add meta file for IPFire WUi status section
+if ! ls /opt/pakfire/db/installed/ | grep -q "meta-${NAME}"; then
+	touch /opt/pakfire/db/installed/meta-${NAME};
+	echo "${Y}Have added now meta file for de- or activation via IPfire WUI ${NAME} on reboot... ${N}";
+	echo;
+	seperator;
+else
+	echo "${NAME} meta file has already been set, will do nothing... ";
+fi
+
 # Start redis
 /etc/init.d/${NAME} start;
 

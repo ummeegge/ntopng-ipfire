@@ -43,7 +43,8 @@ rm -rvf \
 /usr/bin/ntopng \
 /usr/share/ntopng \
 /var/nst \
-/var/tmp/ntopng
+/var/tmp/ntopng \
+/opt/pakfire/db/installed/meta-ntopng;
 
 # Delete old symlink if presant
 rm -rfv /etc/rc.d/rc?.d/???${NAME};
