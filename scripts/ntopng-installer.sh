@@ -214,10 +214,11 @@ do
 					echo;
 				;;
 			esac
+			sleep 2;
+			clear;
 			echo "${B}Installation is finish now.${N}";
 			if pidof -x "ntopng" >/dev/null; then
-				echo -e "You can reach ntopng under '${B}$(awk '/--https-port/ { print "https://"$2 }' /etc/ntopng/ntopng.conf)${N}'.\n
-				Happy testing. Goodbye. ";
+				echo -e "You can reach ntopng under '${B}$(awk '/--https-port/ { print "https://"$2 }' /etc/ntopng/ntopng.conf)${N}'. Happy testing. Goodbye. ";
 				exit 0;
 			else
 				echo;
