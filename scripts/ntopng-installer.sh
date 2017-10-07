@@ -161,58 +161,63 @@ do
 			# Rename geoip updater to prevent deleting of posssible existing ones
 			mv /etc/ntopng/scripts/geoip_updater.sh /etc/ntopng/scripts/geoip_ntopngDEV_updater.sh;
 			echo;
-			clear;
-			echo -e "Since ntopng provides also GeoIP support for ASNs and GeoIP information you can \n
-			1) Only download and integrated the GeoIP data to ntopng (script can be found under /etc/ntopng/scripts) \n
-			2) Download and integrate GeoIP data and make a weekly cronjob to update the data information \n
-			3) Download and integrate GeoIP data and make a monthly cronjob to update the data information \n
-			4) No GeoIP integration and leave at it is.";
-			seperator;
-			printf "%b" "\n
-			For installation only press '${B}1${N}'-[ENTER] \n
-			For Download and weekly update press '${B}2${N}'-[ENTER] \n
-			For Download and monthly update press '${B}3${N}'-[ENTER] \n
-			No GeoIP support press ${R}'N'${N}\n";
-			read what;
-			echo;
-			case "$what" in
-				1*)
-					# Execute GeoIP downloader
-					echo "Will download and integrate GeoIP data... ";
-					sleep 2;
-					/etc/ntopng/scripts/geoip_ntopngDEV_updater.sh;
-				;;
+			while true; do
+				clear;
+				echo -e "Since ntopng provides also GeoIP support for ASNs and GeoIP information you can \n
+				${B}1)${N} Only download and integrated GeoIP to ntopng \n
+				${B}2)${N} Download and integrate GeoIP data and make a weekly cronjob to update the data information \n
+				${B}3)${N} Download and integrate GeoIP data and make a monthly cronjob to update the data information \n
+				${B}4)${N} No GeoIP integration and leave at it is";
+				seperator;
+				printf "%b" "\n
+				For Installation only press '${B}1${N}'-[ENTER] \n
+				For Download and weekly update press '${B}2${N}'-[ENTER] \n
+				For Download and monthly update press '${B}3${N}'-[ENTER] \n
+				For No GeoIP support press ${R}'N'${N}\n";
+				read what;
+				echo;
+				case "$what" in
+					1*)
+						# Execute GeoIP downloader
+						echo "Will download and integrate GeoIP data... ";
+						sleep 2;
+						/etc/ntopng/scripts/geoip_ntopngDEV_updater.sh;
+						break;
+					;;
 
-				2*)
-					# Execute GeoIP downloader
-					echo "Will download and integrate GeoIP data now (this can take a little time now, please be patient) and do a weekly update... ";
-					sleep 2;
-					/etc/ntopng/scripts/geoip_ntopngDEV_updater.sh;
-					cp -v /etc/ntopng/scripts/geoip_ntopngDEV_updater.sh /etc/fcron.weekly/;
-				;;
+					2*)
+						# Execute GeoIP downloader
+						echo "Will download and integrate GeoIP data now and do a weekly update (this can take a little time now, please be patient)... ";
+						sleep 2;
+						/etc/ntopng/scripts/geoip_ntopngDEV_updater.sh;
+						cp -v /etc/ntopng/scripts/geoip_ntopngDEV_updater.sh /etc/fcron.weekly/;
+						break;
+					;;
 
-				3*)
-					# Execute GeoIP downloader
-					echo "Will download and integrate GeoIP data now (this can take a little time now, please be patient) and do a monthly update... ";
-					sleep 2;
-					/etc/ntopng/scripts/geoip_ntopngDEV_updater.sh;
-					cp -v /etc/ntopng/scripts/geoip_ntopngDEV_updater.sh /etc/fcron.monthly/;
-				;;
+					3*)
+						# Execute GeoIP downloader
+						echo "Will download and integrate GeoIP data now and do a monthly update (this can take a little time now, please be patient)... ";
+						sleep 2;
+						/etc/ntopng/scripts/geoip_ntopngDEV_updater.sh;
+						cp -v /etc/ntopng/scripts/geoip_ntopngDEV_updater.sh /etc/fcron.monthly/;
+						break;
+					;;
 
-				4*)
-					# Execute GeoIP downloader
-					echo "Will leave it without GeoIP support... ";
-					sleep 2;
-				;;
+					4*)
+						# Execute GeoIP downloader
+						echo "Will leave it without GeoIP support... ";
+						sleep 2;
+						break;
+					;;
 
-				*)
-					echo;
-					echo "This option does not exist";
-					sleep 2;
-					shift;
-					echo;
-				;;
-			esac
+					*)
+						echo;
+						echo "This option does not exist";
+						sleep 2;
+						shift;
+					;;
+				esac
+			done
 			sleep 2;
 			clear;
 			echo "${B}Installation is finish now.${N}";
@@ -242,6 +247,7 @@ do
 				/etc/redis \
 				/usr/bin/redis-* \
 				/var/redis \
+				/var/lib/redis \
 				/var/log/redis \
 				/opt/pakfire/db/installed/meta-redis \
 				/etc/ntopng \
