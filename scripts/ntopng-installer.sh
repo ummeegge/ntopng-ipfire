@@ -15,10 +15,10 @@ URL="http://people.ipfire.org/~ummeegge/ntopng/";
 # Packages
 #32bit
 PACKAGEA="ntopng-32bit.tar.gz";
-PACKAGESUMA="63d2a2d29e97e2ebd9f5699d424916f9f83e9206068e2e74d9560b5cbce14467";
+PACKAGESUMA="ba9800218d3a467f4461521207b16ac971c718d82011555d8dabbb55b629c7cd";
 # 64bit
 PACKAGEB="ntopng-64bit.tar.gz";
-PACKAGESUMB="8c8cd5add3f2953ccd2600ccb607d8748a2cee17e8d9d6a4a61136f1dccd34ed";
+PACKAGESUMB="c59ed403a028f6d0f25377da10e74ef863d2c63c7cdd2a0847553b411942c8a3";
 
 # Platform check
 TYPE=$(uname -m | tail -c 3);
@@ -223,6 +223,7 @@ do
 			echo "${B}Installation is finish now.${N}";
 			if pidof -x "ntopng" >/dev/null; then
 				echo -e "You can reach ntopng under '${B}$(awk '/--https-port/ { print "https://"$2 }' /etc/ntopng/ntopng.conf)${N}'. Happy testing. Goodbye. ";
+				echo;
 				exit 0;
 			else
 				echo;
