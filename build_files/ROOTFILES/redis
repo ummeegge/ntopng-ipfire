@@ -8,5 +8,4 @@ usr/bin/redis-check-rdb
 usr/bin/redis-cli
 usr/bin/redis-sentinel
 usr/bin/redis-server
-var/lib/redis
 var/log/redis
