@@ -173,7 +173,7 @@ do
 				For Installation only press '${B}1${N}'-[ENTER] \n
 				For Download and weekly update press '${B}2${N}'-[ENTER] \n
 				For Download and monthly update press '${B}3${N}'-[ENTER] \n
-				For No GeoIP support press ${R}'N'${N}\n";
+				For No GeoIP support press ${R}'4'${N}\n";
 				read what;
 				echo;
 				case "$what" in
@@ -218,7 +218,7 @@ do
 					;;
 				esac
 			done
-			sleep 2;
+			sleep 5;
 			clear;
 			echo "${B}Installation is finish now.${N}";
 			if pidof -x "ntopng" >/dev/null; then
