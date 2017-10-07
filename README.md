@@ -1,5 +1,5 @@
 # ntopng-ipfire
-Integration of ntopng into IPFire 07.10.2017
+Integration of ntopng into IPFire 06.10.2017
 
 The following packages are currently involved in this installation:
 
@@ -22,9 +22,9 @@ There is an in- uninstaller available which do the following:
 Currently not done and not sure if it should:
 
 - The redis-server throws the following warnings while it starts
-1) # WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
-2) # WARNING overcommit_memory is set to 0! Background save may fail under low memory condition.
-3) # WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis.
+1) WARNING: The TCP backlog setting of 511 cannot be enforced because /proc/sys/net/core/somaxconn is set to the lower value of 128.
+2) WARNING overcommit_memory is set to 0! Background save may fail under low memory condition.
+3) WARNING you have Transparent Huge Pages (THP) support enabled in your kernel. This will create latency and memory usage issues with Redis.
 
 All warnings can be fixed, take a look in here --> https://forum.ipfire.org/viewtopic.php?f=50&t=19565&start=15#p111144 of howto fix it. 
 Since this warnings are (not known) critical and in first case for use cases with high workloaded redis-server which is for this kind of installation NOT the case, this modifications should be done by the user itself if he needed them to have.
