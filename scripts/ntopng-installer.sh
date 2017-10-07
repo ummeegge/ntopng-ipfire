@@ -131,7 +131,7 @@ do
 					# Check if package is already presant otherwise download it
 					if [[ ! -e "${PACKAGEB}" ]]; then
 						echo;
-						curl -O ${URLB}/${PACKAGEB};
+						curl -O ${URL}/${PACKAGEB};
 						# Check SHA256 sum
 						CHECK=$(sha256sum ${PACKAGEB} | awk '{print $1}');
 						if [[ "${CHECK}" = "${PACKAGESUMB}" ]]; then
