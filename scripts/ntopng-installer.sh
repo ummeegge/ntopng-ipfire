@@ -36,7 +36,6 @@ PACKAGES="${JS} ${ZE} ${RE} ${NT}";
 COLUMNS="$(tput cols)";
 R=$(tput setaf 1);
 B=$(tput setaf 6);
-b=$(tput bold);
 N=$(tput sgr0);
 seperator(){ printf '%*s\n' "${COLUMNS:-$(tput cols)}" '' | tr ' ' -; }
 WELCOME="Welcome to Ntopng on IPFire installation";
