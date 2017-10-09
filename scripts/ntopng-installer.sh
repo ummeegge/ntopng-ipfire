@@ -91,7 +91,7 @@ do
 	read choice
 	clear;
 
-	# Install Glances
+	# Install ntopng
 	case "$choice" in
 		i*|I*)
 			clear;
@@ -164,10 +164,10 @@ do
 			while true; do
 				clear;
 				echo -e "Since ntopng provides also GeoIP support for ASNs and GeoIP information you can \n
-				${B}1)${N} Only download and integrated GeoIP to ntopng \n
-				${B}2)${N} Download and integrate GeoIP data and make a weekly cronjob to update the data information \n
-				${B}3)${N} Download and integrate GeoIP data and make a monthly cronjob to update the data information \n
-				${B}4)${N} No GeoIP integration and leave at it is";
+				${B}1)${N} Only download and integrate GeoIP for ntopng\n
+				${B}2)${N} Download and integrate GeoIP data, will make a weekly cronjob for updates \n
+				${B}3)${N} Download and integrate GeoIP data, will make a monthly cronjob for updates \n
+				${B}4)${N} No GeoIP integration, will leave as it is";
 				seperator;
 				printf "%b" "\n
 				For Installation only press '${B}1${N}'-[ENTER] \n
