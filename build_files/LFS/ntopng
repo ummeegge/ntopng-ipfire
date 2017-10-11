@@ -24,7 +24,7 @@
 
 include Config
 
-VER        = 3.0
+VER        = 3.1
 
 THISAPP    = ntopng-$(VER)
 DL_FILE    = $(THISAPP).tar.gz
@@ -43,7 +43,7 @@ DEPS       = "redis"
 objects = $(DL_FILE)
 
 $(DL_FILE) = $(DL_FROM)/$(DL_FILE)
-nDPI-2.1.0	= 0dfa6db4bbc4293b11fb656fc0d79913
+nDPI-2.1	= 0dfa6db4bbc4293b11fb656fc0d79913
 $(DL_FILE)_MD5 	= b994c0d42cedfd131f8bdc3b7e80ad64
 
 install : $(TARGET)

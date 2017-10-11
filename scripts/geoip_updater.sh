@@ -22,7 +22,7 @@ https://download.maxmind.com/download/geoip/database/asnum/GeoIPASNumv6.dat.gz
 if ! /usr/bin/wget --no-check-certificate ${URLS} -o /tmp/geoip_update_dwn.log; then
     /usr/bin/logger -t ntopng "Error: Downloading GeoIP database has been failed";
     exit 1;
-    /bin/rm ${WORKDIR};
+    /bin/rm -rf ${WORKDIR};
 fi
 # CleanUP GeoIP dir
 /bin/rm -rf ${GEOIPDIR}/*.dat
