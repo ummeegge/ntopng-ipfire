@@ -284,6 +284,7 @@ usr/share/ntopng/scripts/lua/admin/password_reset.lua
 usr/share/ntopng/scripts/lua/admin/prefs.lua
 usr/share/ntopng/scripts/lua/admin/users.lua
 usr/share/ntopng/scripts/lua/admin/validate_new_user.lua
+usr/share/ntopng/scripts/lua/as_details.lua
 usr/share/ntopng/scripts/lua/as_stats.lua
 usr/share/ntopng/scripts/lua/authorize_captive.lua
 usr/share/ntopng/scripts/lua/captive_portal.lua
@@ -389,6 +390,7 @@ usr/share/ntopng/scripts/lua/local_hosts_stats.lua
 usr/share/ntopng/scripts/lua/login.lua
 usr/share/ntopng/scripts/lua/logout.lua
 usr/share/ntopng/scripts/lua/mac_details.lua
+usr/share/ntopng/scripts/lua/mac_stats.lua
 usr/share/ntopng/scripts/lua/macs_stats.lua
 #usr/share/ntopng/scripts/lua/modules
 usr/share/ntopng/scripts/lua/modules/alert_api.lua
