@@ -11,7 +11,7 @@
 INSTALLDIR="/opt/pakfire/tmp";
 
 # Download address
-URL="http://people.ipfire.org/~ummeegge/ntopng/";
+URL="https://people.ipfire.org/~ummeegge/ntopng/";
 # Packages
 #32bit
 PACKAGEA="ntopng-32bit.tar.gz";
