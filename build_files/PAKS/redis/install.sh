@@ -48,7 +48,6 @@ if ! ls /opt/pakfire/db/installed/ | grep -q "meta-${NAME}"; then
 	touch /opt/pakfire/db/installed/meta-${NAME};
 	echo "${Y}Have added now meta file for de- or activation via IPfire WUI ${NAME} on reboot... ${N}";
 	echo;
-	seperator;
 else
 	echo "${NAME} meta file has already been set, will do nothing... ";
 fi

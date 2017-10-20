@@ -9,7 +9,7 @@ The following packages are currently involved in this installation:
 - https://github.com/json-c/json-c
 - https://github.com/zeromq/libzmq
 
-There is an in- uninstaller available which do the following:
+There is an [in- uninstaller](https://github.com/ummeegge/ntopng-ipfire/blob/master/scripts/ntopng-installer.sh) available which do the following:
 
 - Add new user 'ntopng'.
 - Investigates interfaces and subnets and integrates them into ntopng.conf .
