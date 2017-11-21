@@ -13,7 +13,7 @@ There is an [in- uninstaller](https://github.com/ummeegge/ntopng-ipfire/blob/mas
 
 - Add new user 'ntopng'.
 - Investigates interfaces and subnets and integrates them into ntopng.conf .
-- Since ntopng do not work with grsecurity, paxctl needs to disable mprotect for ntopng which will also be done via install.
+- Since ntopng do not work with grsecurity (LuaJIT), paxctl needs to disable it for ntopng which will also be done via install.
 - Certificate for HTTPS will be generated while installation.
 - green0 interface of IPFire will be investiagted and integrated into '--https-port' directive in ntopng.conf to allow access only from LAN side.
 - An geoip updater for weekly or monthly cronjob updates are provided by the installer. geoip_updater is also presant under /etc/ntopng/scripts .
