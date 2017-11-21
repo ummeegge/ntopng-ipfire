@@ -24,7 +24,7 @@
 
 include Config
 
-VER        = 3.1
+VER        = 3.1.171120
 
 THISAPP    = ntopng-$(VER)
 DL_FILE    = $(THISAPP).tar.gz
@@ -32,7 +32,7 @@ DL_FROM    = $(URL_IPFIRE)
 DIR_APP    = $(DIR_SRC)/$(THISAPP)
 TARGET     = $(DIR_INFO)/$(THISAPP)
 PROG       = ntopng
-PAK_VER    = 1
+PAK_VER    = 2
 
 DEPS       = "redis"
 
@@ -43,8 +43,8 @@ DEPS       = "redis"
 objects = $(DL_FILE)
 
 $(DL_FILE) = $(DL_FROM)/$(DL_FILE)
-nDPI-2.1	= 0dfa6db4bbc4293b11fb656fc0d79913
-$(DL_FILE)_MD5 	= b994c0d42cedfd131f8bdc3b7e80ad64
+nDPI-2.1.171120		= e19506e8f3ac9e8cbd725586ca86d6d0
+$(DL_FILE)_MD5 		= 270fbbb986a38dc97fabcc919842a557
 
 install : $(TARGET)
 
@@ -77,11 +77,12 @@ $(subst %,%_MD5,$(objects)) :
 $(TARGET) : $(patsubst %,$(DIR_DL)/%,$(objects))
 	@$(PREBUILD)
 	# build nDPI
-	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/nDPI-2.1.0.tar.gz
+	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/nDPI-2.1.171120.tar.gz
 	cd $(DIR_SRC)/nDPI && ./autogen.sh
 	cd $(DIR_SRC)/nDPI && ./configure	\
 		--prefix=/usr			\
 		--enable-json-c
+
 	cd $(DIR_SRC)/nDPI && make $(MAKETUNING)
 
 	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/$(DL_FILE)

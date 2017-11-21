@@ -102,7 +102,7 @@ ln -s ../init.d/${NAME} /etc/rc.d/rc0.d/K${STOP}${NAME};
 ln -s ../init.d/${NAME} /etc/rc.d/rc3.d/S${START}${NAME};
 ln -s ../init.d/${NAME} /etc/rc.d/rc6.d/K${REBOOT}${NAME};
 
-# Disable mprotect for ntopng otherwise it won´t start
+# Disable grsecurity for ntopng otherwise it won´t start
 echo;
 echo "${Y}Disable mprotect for ntopng${N}";
 seperator;

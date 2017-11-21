@@ -40,7 +40,7 @@ usr/share/ntopng/httpdocs/css/cubism.css
 usr/share/ntopng/httpdocs/css/datepicker.css
 usr/share/ntopng/httpdocs/css/dc.css
 usr/share/ntopng/httpdocs/css/flags.css
-usr/share/ntopng/httpdocs/css/images
+#usr/share/ntopng/httpdocs/css/images
 usr/share/ntopng/httpdocs/css/images/ui-bg_diagonals-thick_18_b81900_40x40.png
 usr/share/ntopng/httpdocs/css/images/ui-bg_diagonals-thick_20_666666_40x40.png
 usr/share/ntopng/httpdocs/css/images/ui-bg_flat_10_000000_40x100.png
@@ -68,7 +68,7 @@ usr/share/ntopng/httpdocs/css/timeline.css
 usr/share/ntopng/httpdocs/css/timepicker.css
 usr/share/ntopng/httpdocs/favicon.ico
 #usr/share/ntopng/httpdocs/font-awesome
-usr/share/ntopng/httpdocs/font-awesome/HELP-US-OUT.txt
+#usr/share/ntopng/httpdocs/font-awesome/HELP-US-OUT.txt
 #usr/share/ntopng/httpdocs/font-awesome/css
 usr/share/ntopng/httpdocs/font-awesome/css/font-awesome.css
 usr/share/ntopng/httpdocs/font-awesome/css/font-awesome.min.css
@@ -95,7 +95,7 @@ usr/share/ntopng/httpdocs/font-awesome/less/screen-reader.less
 usr/share/ntopng/httpdocs/font-awesome/less/stacked.less
 usr/share/ntopng/httpdocs/font-awesome/less/variables.less
 #usr/share/ntopng/httpdocs/font-awesome/scss
-#usr/share/ntopng/httpdocs/font-awesome/scss/_animated.scss
+usr/share/ntopng/httpdocs/font-awesome/scss/_animated.scss
 usr/share/ntopng/httpdocs/font-awesome/scss/_bordered-pulled.scss
 usr/share/ntopng/httpdocs/font-awesome/scss/_core.scss
 usr/share/ntopng/httpdocs/font-awesome/scss/_fixed-width.scss
@@ -124,7 +124,7 @@ usr/share/ntopng/httpdocs/img/glyphicons-halflings.png
 usr/share/ntopng/httpdocs/img/graph.gif
 usr/share/ntopng/httpdocs/img/info.png
 usr/share/ntopng/httpdocs/img/info_icon.png
-usr/share/ntopng/httpdocs/img/interaction-graph-icons
+#usr/share/ntopng/httpdocs/img/interaction-graph-icons
 usr/share/ntopng/httpdocs/img/interaction-graph-icons/apache2.png
 usr/share/ntopng/httpdocs/img/interaction-graph-icons/firefox.png
 usr/share/ntopng/httpdocs/img/interaction-graph-icons/java.png
@@ -258,10 +258,10 @@ usr/share/ntopng/scripts/callbacks/second.lua
 usr/share/ntopng/scripts/callbacks/shutdown.lua
 usr/share/ntopng/scripts/callbacks/startup.lua
 #usr/share/ntopng/scripts/callbacks/user_scripts
-usr/share/ntopng/scripts/callbacks/user_scripts/inline
+#usr/share/ntopng/scripts/callbacks/user_scripts/inline
 usr/share/ntopng/scripts/callbacks/user_scripts/inline/default.lua
 usr/share/ntopng/scripts/callbacks/user_scripts/loader.lua
-usr/share/ntopng/scripts/callbacks/user_scripts/periodic
+#usr/share/ntopng/scripts/callbacks/user_scripts/periodic
 usr/share/ntopng/scripts/callbacks/user_scripts/periodic/default.lua
 #usr/share/ntopng/scripts/locales
 usr/share/ntopng/scripts/locales/en.lua
@@ -271,7 +271,6 @@ usr/share/ntopng/scripts/lua/API.lua
 usr/share/ntopng/scripts/lua/about.lua
 #usr/share/ntopng/scripts/lua/admin
 usr/share/ntopng/scripts/lua/admin/add_user.lua
-usr/share/ntopng/scripts/lua/admin/change_ndpi_category.lua
 usr/share/ntopng/scripts/lua/admin/change_user_prefs.lua
 usr/share/ntopng/scripts/lua/admin/delete_user.lua
 usr/share/ntopng/scripts/lua/admin/edit_ndpi_applications.lua
@@ -300,6 +299,7 @@ usr/share/ntopng/scripts/lua/examples/interface.lua
 usr/share/ntopng/scripts/lua/examples/ntop.lua
 usr/share/ntopng/scripts/lua/examples/sqlite.lua
 usr/share/ntopng/scripts/lua/export_data.lua
+usr/share/ntopng/scripts/lua/find_app.lua
 usr/share/ntopng/scripts/lua/find_host.lua
 usr/share/ntopng/scripts/lua/find_member.lua
 usr/share/ntopng/scripts/lua/find_prefs.lua
@@ -318,7 +318,6 @@ usr/share/ntopng/scripts/lua/get_geo_hosts.lua
 usr/share/ntopng/scripts/lua/get_grouped_hosts_data.lua
 usr/share/ntopng/scripts/lua/get_historical_data.lua
 usr/share/ntopng/scripts/lua/get_historical_favourites.lua
-usr/share/ntopng/scripts/lua/get_host_categories.lua
 usr/share/ntopng/scripts/lua/get_host_contacts.lua
 usr/share/ntopng/scripts/lua/get_host_daily_activity.lua
 usr/share/ntopng/scripts/lua/get_host_data.lua
@@ -341,9 +340,7 @@ usr/share/ntopng/scripts/lua/get_unknown_devices_data.lua
 usr/share/ntopng/scripts/lua/get_user_info.lua
 usr/share/ntopng/scripts/lua/get_vlan_data.lua
 usr/share/ntopng/scripts/lua/get_vlans_data.lua
-usr/share/ntopng/scripts/lua/host_category_stats.lua
 usr/share/ntopng/scripts/lua/host_details.lua
-usr/share/ntopng/scripts/lua/host_details_categories.lua
 usr/share/ntopng/scripts/lua/host_details_ndpi.lua
 usr/share/ntopng/scripts/lua/host_details_ndpi_categories.lua
 usr/share/ntopng/scripts/lua/host_dns_breakdown.lua
@@ -404,7 +401,7 @@ usr/share/ntopng/scripts/lua/modules/discover_utils.lua
 usr/share/ntopng/scripts/lua/modules/dkjson.lua
 usr/share/ntopng/scripts/lua/modules/flow_aggregation_utils.lua
 usr/share/ntopng/scripts/lua/modules/flow_utils.lua
-usr/share/ntopng/scripts/lua/modules/grafana
+#usr/share/ntopng/scripts/lua/modules/grafana
 usr/share/ntopng/scripts/lua/modules/grafana/index.lua
 usr/share/ntopng/scripts/lua/modules/grafana/query.lua
 usr/share/ntopng/scripts/lua/modules/grafana/search.lua
@@ -415,6 +412,7 @@ usr/share/ntopng/scripts/lua/modules/host_pools_utils.lua
 usr/share/ntopng/scripts/lua/modules/http_bridge_conf_utils.lua
 usr/share/ntopng/scripts/lua/modules/http_lint.lua
 #usr/share/ntopng/scripts/lua/modules/i18n
+usr/share/ntopng/scripts/lua/modules/i18n/i18n.lua
 usr/share/ntopng/scripts/lua/modules/i18n/init.lua
 usr/share/ntopng/scripts/lua/modules/i18n/interpolate.lua
 usr/share/ntopng/scripts/lua/modules/i18n/plural.lua
@@ -429,7 +427,7 @@ usr/share/ntopng/scripts/lua/modules/persistence.lua
 usr/share/ntopng/scripts/lua/modules/prefs_menu.lua
 usr/share/ntopng/scripts/lua/modules/prefs_utils.lua
 #usr/share/ntopng/scripts/lua/modules/resty
-usr/share/ntopng/scripts/lua/modules/resty/template
+#usr/share/ntopng/scripts/lua/modules/resty/template
 usr/share/ntopng/scripts/lua/modules/resty/template.lua
 usr/share/ntopng/scripts/lua/modules/resty/template/html.lua
 usr/share/ntopng/scripts/lua/modules/resty/template/microbenchmark.lua

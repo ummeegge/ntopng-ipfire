@@ -24,7 +24,7 @@
 . /opt/pakfire/lib/functions.sh
 NAME="redis";
 extract_files
-restore_backup ${NAME}
+#restore_backup ${NAME}
 
 # Delete old symlink if presant
 rm -rfv /etc/rc.d/rc?.d/???${NAME};
