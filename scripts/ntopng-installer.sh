@@ -14,11 +14,11 @@ INSTALLDIR="/opt/pakfire/tmp";
 URL="https://people.ipfire.org/~ummeegge/ntopng/";
 # Packages
 #32bit
-PACKAGEA="ntopng-32bit.tar.gz";
-PACKAGESUMA="ba9800218d3a467f4461521207b16ac971c718d82011555d8dabbb55b629c7cd";
+PACKAGEA="ntopng-32bit_dev_v2.tar.gz";
+PACKAGESUMA="81cb70780dda4231c04fb3e12d725b637389f714d0a04f865f94a6ba777c271e";
 # 64bit
-PACKAGEB="ntopng-64bit.tar.gz";
-PACKAGESUMB="c59ed403a028f6d0f25377da10e74ef863d2c63c7cdd2a0847553b411942c8a3";
+PACKAGEB="ntopng-64bit_dev_v2.tar.gz";
+PACKAGESUMB="de1ef77a300b9757f9bac3f930f337d7042fcfdf56afaa433f1b07cf2a165dea";
 
 # Platform check
 TYPE=$(uname -m | tail -c 3);
@@ -29,7 +29,7 @@ TAR="tar xvf";
 ZE="zeromq-4.2.2-1.ipfire";
 JS="json-c-json-c-0.12.1-20160607-1.ipfire";
 RE="redis-4.0.2-1.ipfire";
-NT="ntopng-3.0-1.ipfire";
+NT="ntopng-3.1.171120-2.ipfire";
 PACKAGES="${JS} ${ZE} ${RE} ${NT}";
 
 # Formatting Colors and text
@@ -174,6 +174,8 @@ do
 				For Download and weekly update press '${B}2${N}'-[ENTER] \n
 				For Download and monthly update press '${B}3${N}'-[ENTER] \n
 				For No GeoIP support press ${R}'4'${N}\n";
+				seperator;
+				printf "%b" "\n";
 				read what;
 				echo;
 				case "$what" in

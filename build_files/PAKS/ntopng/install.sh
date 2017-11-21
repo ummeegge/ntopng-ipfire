@@ -104,7 +104,7 @@ ln -s ../init.d/${NAME} /etc/rc.d/rc6.d/K${REBOOT}${NAME};
 
 # Disable grsecurity for ntopng otherwise it won´t start
 echo;
-echo "${Y}Disable mprotect for ntopng${N}";
+echo "${Y}Disable grsecurity for ntopng${N}";
 seperator;
 paxctl -c /usr/bin/ntopng 2>/dev/null;
 paxctl -pemrxs /usr/bin/ntopng 2>/dev/null;
