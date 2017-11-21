@@ -3,7 +3,7 @@ Integration of ntopng into IPFire 06.10.2017
 
 The following packages are currently involved in this installation:
 
-- https://github.com/ntop/ntopng in version v.3.1.171006	[Community build]
+- https://github.com/ntop/ntopng in version v.3.1.171121	[Community build]
 - https://github.com/ntop/nDPI
 - https://redis.io/download
 - https://github.com/json-c/json-c
