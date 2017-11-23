@@ -1,11 +1,11 @@
 #!/bin/bash
 
 #
-# Description: In- and Uninstaller for ntopng on IPFire platforms for 32 and 64 bit systems.
-# Installer includes also installation of redis and json-c
+# Description: In- uninstaller and updater for ntopng on IPFire platforms for 32 and 64 bit systems.
+# Installer includes also installation of redis, json-c, Geoip-api-c and zeroMQ
 #
-# $Author ummeegge ipfire org ; $date: 05.10.2017 13:47:23
-############################################################################################
+# $author ummeegge web de ; $date: 23.11.2017 12:58:42
+####################################################################################################
 #
 
 INSTALLDIR="/opt/pakfire/tmp";
