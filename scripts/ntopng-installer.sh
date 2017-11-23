@@ -14,11 +14,11 @@ INSTALLDIR="/opt/pakfire/tmp";
 URL="https://people.ipfire.org/~ummeegge/ntopng/";
 # Packages
 #32bit
-PACKAGEA="ntopng-32bit_dev_v2.tar.gz";
-PACKAGESUMA="81cb70780dda4231c04fb3e12d725b637389f714d0a04f865f94a6ba777c271e";
+PACKAGEA="ntopng-32bit_dev_v3.tar.gz";
+PACKAGESUMA="ced96e26a78ece34fd480ac92d3a1af7ce764a598dac3fb6fa3f0c2b22b7f838";
 # 64bit
-PACKAGEB="ntopng-64bit_dev_v2.tar.gz";
-PACKAGESUMB="de1ef77a300b9757f9bac3f930f337d7042fcfdf56afaa433f1b07cf2a165dea";
+PACKAGEB="ntopng-64bit_dev_v3.tar.gz";
+PACKAGESUMB="763deed77126f1e278134e5c552932f74d0ead8d94882c25ac520d3f522a7fbd";
 
 # Platform check
 TYPE=$(uname -m | tail -c 3);
@@ -29,7 +29,7 @@ TAR="tar xvf";
 ZE="zeromq-4.2.2-1.ipfire";
 JS="json-c-json-c-0.12.1-20160607-1.ipfire";
 RE="redis-4.0.2-1.ipfire";
-NT="ntopng-3.1.171120-2.ipfire";
+NT="ntopng-3.1.171122-2.ipfire";
 PACKAGES="${JS} ${ZE} ${RE} ${NT}";
 
 # Formatting Colors and text
@@ -50,7 +50,7 @@ QUIT="               If you want to quit this installation press      ${B}${b}'q
 # Clean up function
 clean_up() {
 	cd ${INSTALLDIR};
-	rm -rvf files.tar.xz *.sh *.ipfire ROOTFILES >/dev/null;
+	rm -rvf files.tar.xz *.sh *.ipfire ROOTFILES ntopng-*.tar.gz >/dev/null;
 	cd /tmp;
 }
 
