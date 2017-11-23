@@ -68,7 +68,7 @@ usr/share/ntopng/httpdocs/css/timeline.css
 usr/share/ntopng/httpdocs/css/timepicker.css
 usr/share/ntopng/httpdocs/favicon.ico
 #usr/share/ntopng/httpdocs/font-awesome
-#usr/share/ntopng/httpdocs/font-awesome/HELP-US-OUT.txt
+usr/share/ntopng/httpdocs/font-awesome/HELP-US-OUT.txt
 #usr/share/ntopng/httpdocs/font-awesome/css
 usr/share/ntopng/httpdocs/font-awesome/css/font-awesome.css
 usr/share/ntopng/httpdocs/font-awesome/css/font-awesome.min.css
@@ -124,7 +124,7 @@ usr/share/ntopng/httpdocs/img/glyphicons-halflings.png
 usr/share/ntopng/httpdocs/img/graph.gif
 usr/share/ntopng/httpdocs/img/info.png
 usr/share/ntopng/httpdocs/img/info_icon.png
-#usr/share/ntopng/httpdocs/img/interaction-graph-icons
+usr/share/ntopng/httpdocs/img/interaction-graph-icons
 usr/share/ntopng/httpdocs/img/interaction-graph-icons/apache2.png
 usr/share/ntopng/httpdocs/img/interaction-graph-icons/firefox.png
 usr/share/ntopng/httpdocs/img/interaction-graph-icons/java.png
@@ -258,10 +258,10 @@ usr/share/ntopng/scripts/callbacks/second.lua
 usr/share/ntopng/scripts/callbacks/shutdown.lua
 usr/share/ntopng/scripts/callbacks/startup.lua
 #usr/share/ntopng/scripts/callbacks/user_scripts
-#usr/share/ntopng/scripts/callbacks/user_scripts/inline
+usr/share/ntopng/scripts/callbacks/user_scripts/inline
 usr/share/ntopng/scripts/callbacks/user_scripts/inline/default.lua
 usr/share/ntopng/scripts/callbacks/user_scripts/loader.lua
-#usr/share/ntopng/scripts/callbacks/user_scripts/periodic
+usr/share/ntopng/scripts/callbacks/user_scripts/periodic
 usr/share/ntopng/scripts/callbacks/user_scripts/periodic/default.lua
 #usr/share/ntopng/scripts/locales
 usr/share/ntopng/scripts/locales/en.lua
@@ -431,6 +431,7 @@ usr/share/ntopng/scripts/lua/modules/prefs_utils.lua
 usr/share/ntopng/scripts/lua/modules/resty/template.lua
 usr/share/ntopng/scripts/lua/modules/resty/template/html.lua
 usr/share/ntopng/scripts/lua/modules/resty/template/microbenchmark.lua
+usr/share/ntopng/scripts/lua/modules/rrd_dump_utils.lua
 usr/share/ntopng/scripts/lua/modules/rrd_utils.lua
 usr/share/ntopng/scripts/lua/modules/slack_utils.lua
 usr/share/ntopng/scripts/lua/modules/sqlite_utils.lua

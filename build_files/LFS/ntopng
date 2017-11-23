@@ -24,7 +24,7 @@
 
 include Config
 
-VER        = 3.1.171120
+VER        = 3.1.171122
 
 THISAPP    = ntopng-$(VER)
 DL_FILE    = $(THISAPP).tar.gz
@@ -34,7 +34,7 @@ TARGET     = $(DIR_INFO)/$(THISAPP)
 PROG       = ntopng
 PAK_VER    = 2
 
-DEPS       = "redis"
+DEPS       = "redis json-c zeromq"
 
 ###############################################################################
 # Top-level Rules
@@ -43,8 +43,8 @@ DEPS       = "redis"
 objects = $(DL_FILE)
 
 $(DL_FILE) = $(DL_FROM)/$(DL_FILE)
-nDPI-2.1.171120		= e19506e8f3ac9e8cbd725586ca86d6d0
-$(DL_FILE)_MD5 		= 270fbbb986a38dc97fabcc919842a557
+nDPI-2.1.171122		= 5c6580bba7d0520108eae3945de00b5c
+$(DL_FILE)_MD5 		= 9758d663b1b272a0788868c7e0b4ca88
 
 install : $(TARGET)
 
@@ -77,7 +77,7 @@ $(subst %,%_MD5,$(objects)) :
 $(TARGET) : $(patsubst %,$(DIR_DL)/%,$(objects))
 	@$(PREBUILD)
 	# build nDPI
-	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/nDPI-2.1.171120.tar.gz
+	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/nDPI-2.1.171122.tar.gz
 	cd $(DIR_SRC)/nDPI && ./autogen.sh
 	cd $(DIR_SRC)/nDPI && ./configure	\
 		--prefix=/usr			\

@@ -11,3 +11,4 @@ usr/bin/redis-server
 var/log/redis
 #var/redis
 var/redis/6379
+
