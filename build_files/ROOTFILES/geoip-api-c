@@ -1,0 +1,11 @@
+usr/bin/geoiplookup
+usr/bin/geoiplookup6
+#usr/include/GeoIP.h
+#usr/include/GeoIPCity.h
+#usr/lib/libGeoIP.la
+usr/lib/libGeoIP.so
+usr/lib/libGeoIP.so.1
+usr/lib/libGeoIP.so.1.6.11
+#usr/lib/pkgconfig/geoip.pc
+#usr/share/man/man1/geoiplookup.1
+#usr/share/man/man1/geoiplookup6.1

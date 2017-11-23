@@ -14,11 +14,11 @@ INSTALLDIR="/opt/pakfire/tmp";
 URL="https://people.ipfire.org/~ummeegge/ntopng/";
 # Packages
 #32bit
-PACKAGEA="ntopng-32bit_dev_v3.tar.gz";
-PACKAGESUMA="ced96e26a78ece34fd480ac92d3a1af7ce764a598dac3fb6fa3f0c2b22b7f838";
+PACKAGEA="ntopng-32bit_dev_v4.tar.gz";
+PACKAGESUMA="4f389bbbe7cc36b173aca53316b67b4ed0df05ea42c1ca9f2913ad566c5c3b6e";
 # 64bit
-PACKAGEB="ntopng-64bit_dev_v3.tar.gz";
-PACKAGESUMB="763deed77126f1e278134e5c552932f74d0ead8d94882c25ac520d3f522a7fbd";
+PACKAGEB="ntopng-64bit_dev_v4.tar.gz";
+PACKAGESUMB="a569b751fe09d3d7968cf849f0a3295e84676c1a78a048ad5f6899463366bfdd";
 
 # Platform check
 TYPE=$(uname -m | tail -c 3);
@@ -30,7 +30,7 @@ ZE="zeromq-4.2.2-1.ipfire";
 JS="json-c-json-c-0.12.1-20160607-1.ipfire";
 RE="redis-4.0.2-1.ipfire";
 NT="ntopng-3.1.171122-2.ipfire";
-PACKAGES="${JS} ${ZE} ${RE} ${NT}";
+GE="geoip-api-c-1.6.11-1.ipfire";
 
 # Formatting Colors and text
 COLUMNS="$(tput cols)";
@@ -113,10 +113,12 @@ download_function() {
 # Installation function of basic components
 install_function() {
 	cd /tmp
-	cp ntopng-*.tar.gz ${INSTALLDIR};
+	cp ntopng-*_dev_v4.tar.gz ${INSTALLDIR};
 	cd ${INSTALLDIR};
-	tar xvfz ntopng-*.tar.gz;
+	tar xvfz ntopng-*_dev_v4.tar.gz;
 	${TAR} ${ZE};
+	./install.sh;
+	${TAR} ${GE};
 	./install.sh;
 	${TAR} ${JS};
 	./install.sh;
@@ -130,9 +132,15 @@ install_function() {
 # Update function
 update_function() {
 	cd /tmp
-	cp ntopng-*.tar.gz ${INSTALLDIR};
+	cp ntopng-*_dev_v4.tar.gz ${INSTALLDIR};
 	cd ${INSTALLDIR};
-	tar xvfz ntopng-*.tar.gz;
+	tar xvfz ntopng-*_dev_v4.tar.gz;
+	${TAR} ${ZE};
+	./install.sh;
+	${TAR} ${GE};
+	./install.sh;
+	${TAR} ${JS};
+	./install.sh;
 	${TAR} ${NT};
 	./update.sh;
 	clean_up;
@@ -277,6 +285,9 @@ do
 				/var/nst \
 				/var/tmp/ntopng \
 				/opt/pakfire/db/installed/meta-ntopng \
+				/usr/bin/geoiplookup \
+				/usr/bin/geoiplookup6 \
+				/usr/lib/libGeoIP.so* \
 				rm -rfv /etc/rc.d/rc?.d/???ntopng \
 				rm -rfv /etc/rc.d/rc?.d/???redis;
 				userdel ntopng;
@@ -293,19 +304,26 @@ do
 		;;
 
 		u*|U*)
-			clear;
-			read -p "To update ntopng now press [ENTER], to quit use [CTRL-c]... ";
-			download_function;
-			update_function;
-			echo "${B}Update is finish now.${N}";
-			if pidof -x "ntopng" >/dev/null; then
-				echo -e "You can reach ntopng under '${B}$(awk '/--https-port/ { print "https://"$2 }' /etc/ntopng/ntopng.conf)${N}'. Happy testing. Goodbye. ";
+			if ! ls /usr/bin/ | grep -q ntopng; then
 				echo;
-				exit 0;
+				echo "Ntopng is not installed on this system, please install it first... ";
+				sleep 5;
+				echo;
 			else
-				echo;
-				echo "${R}Something went wrong ntopng has NOT been started, please report this here --> https://forum.ipfire.org/viewtopic.php?f=50&t=19565 will then try to help you.${N}";
-				echo;
+				clear;
+				read -p "To update ntopng now press [ENTER], to quit use [CTRL-c]... ";
+				download_function;
+				update_function;
+				echo "${B}Update is finish now.${N}";
+				if pidof -x "ntopng" >/dev/null; then
+					echo -e "You can reach ntopng under '${B}$(awk '/--https-port/ { print "https://"$2 }' /etc/ntopng/ntopng.conf)${N}'. Happy testing. Goodbye. ";
+					echo;
+					exit 0;
+				else
+					echo;
+					echo "${R}Something went wrong ntopng has NOT been started, please report this here --> https://forum.ipfire.org/viewtopic.php?f=50&t=19565 will then try to help you.${N}";
+					echo;
+				fi
 			fi
 		;;
 
