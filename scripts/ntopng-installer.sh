@@ -25,7 +25,7 @@ PACKAGESUMB="fc2e62fbfa1181d29867aeb4a137e1396cfe7efd47df8dd1c613de15cff502f7";
 # Platform check
 TAR="tar xvf";
 TYPE=$(uname -m | tail -c 3);
-ACTVERSION=$(curl -s ${URL} --list-only | awk -F'-' '/SHA/ { print $3 }');
+ACTVERSION=$(curl -s ${URL} --list-only | awk -F'-' '/SHA/ { print $2 }');
 INSTALLEDVER=$(ntopng -V | head -1 | awk '{ print $1 }');
 
 # Packages
