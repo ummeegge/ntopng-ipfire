@@ -21,36 +21,6 @@
 #                                                                          #
 ############################################################################
 #
-
-CONF="/etc/ntopng";
-DB="/var/nst";
-BCK="/tmp/ntopng_bck";
-CERT="/usr/share/ntopng/httpdocs/ssl";
-
 . /opt/pakfire/lib/functions.sh
-
-# Stop services
-/etc/init.d/ntopng stop && /etc/init.d/redis stop;
-
-# Create backup dir
-mkdir -p /tmp/ntopng_bck;
-# Save ntopng config and protos.txt
-mv -f ${CONF}/ntopng.conf ${CONF}/scripts/protos.txt ${DB}/ntopng ${CERT}/ntopng-cert.pem ${BCK};
-
 ./uninstall.sh
 ./install.sh
-
-# Recover configs back
-mv -f ${BCK}/ntopng.conf ${CONF};
-mv -f ${BCK}/protos.txt ${CONF}/scripts;
-mv -f ${BCK}/ntopng-cert.pem ${CERT};
-mv -f ${BCK}/ntopng ${DB};
-
-# Restart service
-/etc/init.d/redis restart && /etc/init.d/ntopng restart;
-
-# Delete tmp backup dir
-rm -rf ${BCK};
-
-# EOF
-
