@@ -1,11 +1,12 @@
 #! /bin/sh
 
-### BEGIN INIT INFO
-# Provides:     	redis-server
-# Description:      redis-server - Persistent key-value db
+### BEGIN INIT INFO ####################################################################
+# Provides:	Network monitoring with nDPI protocol detection,
+#		    and real-time flow analysis. Ntopng relies on Redis key-value server.
+# Description:	Ntopng - Traffic monitoring for computer networks.
 #
-# ummeegge ipfire org ; $date: 30.09.2017
-### END INIT INFO
+# $author: ummeegge ipfire org ; $date: 30.09.2017
+### END INIT INFO ######################################################################
 
 . /etc/sysconfig/rc
 . ${rc_functions}

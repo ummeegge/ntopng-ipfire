@@ -1,10 +1,10 @@
 #! /bin/sh
-### BEGIN INIT INFO
-# Provides:     redis-server
-# Description:      redis-server - Persistent key-value db
+### BEGIN INIT INFO ##################################################################
+# Provides:	NoSQL in-memory database with key-value store and optional durability.
+# Description:	redis-server - Persistent key-value db
 #
 # ummeegge ipfire org; 29.09.2017
-### END INIT INFO
+### END INIT INFO ####################################################################
 
 . /etc/sysconfig/rc
 . ${rc_functions}

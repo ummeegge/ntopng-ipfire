@@ -21,6 +21,27 @@
 #                                                                          #
 ############################################################################
 #
+
+CONF="/etc/redis";
+BCK="/tmp/redis_bck";
+
 . /opt/pakfire/lib/functions.sh
+
+# Create tmp backup dir
+mkdir -p ${BCK};
+# Save redis config
+cp -rv ${CONF}/redis.conf ${BCK};
+
 ./uninstall.sh
 ./install.sh
+
+# Recover redis configuration
+mv ${BCK}/redis.conf ${CONF};
+# Delete temporary backup dir
+rm -rf ${BCK};
+
+# Restart service
+/etc/init.d/redis restart
+
+# EOF
+
