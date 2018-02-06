@@ -116,9 +116,9 @@ download_function() {
 # Installation function of basic components
 install_function() {
 	cd /tmp || exit 1;
-	cp ntopng-*_dev_${DEV}.tar.gz ${INSTALLDIR};
+	cp ntopng-*_${DEV}_dev.tar.gz ${INSTALLDIR};
 	cd ${INSTALLDIR};
-	tar xvfz ntopng-*_dev_${DEV}.tar.gz;
+	tar xvfz ntopng-*_${DEV}_dev.tar.gz;
 	${TAR} ${ZE};
 	./install.sh;
 	${TAR} ${GE};
