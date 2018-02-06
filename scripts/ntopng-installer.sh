@@ -20,7 +20,7 @@ PACKAGEA="ntopng-32bit_${DEV}_dev.tar.gz";
 PACKAGESUMA="ff08028fa7c98b1c1ccb5e29a3ed087e33603f3165538bd30542a76a0b50ffe7";
 # 64bit
 PACKAGEB="ntopng-64bit_${DEV}_dev.tar.gz";
-PACKAGESUMB="083b1660c50a8da033ed93415dfb043bd206c6f15ca8855e737ddec229762b87";
+PACKAGESUMB="3bfa19759f9f9555ed020b2beb4ae2b90a0b2eb2e47c4c597f828d9564880ad5";
 
 # Platform check
 TAR="tar xvf";
