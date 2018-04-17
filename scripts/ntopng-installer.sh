@@ -159,6 +159,9 @@ update_function() {
 	./update.sh;
 	${TAR} ${NT};
 	./update.sh;
+	if ls /usr/lib | grep -q mysql; then
+		ln -s /usr/lib/mysql/libmysqlclient.so.15 /usr/lib/libmysqlclient.so.15
+	fi
 	clean_up;
 }
 
