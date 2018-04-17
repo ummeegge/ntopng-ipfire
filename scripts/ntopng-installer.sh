@@ -162,6 +162,12 @@ update_function() {
 	clean_up;
 }
 
+depcheck_funct() {
+	if ls /usr/lib | grep -q mysql; then
+		ln -s /usr/lib/mysql/libmysqlclient.so.15 /usr/lib/libmysqlclient.so.15
+	fi
+}
+
 ## Installer Menu
 while true
 do
@@ -190,6 +196,7 @@ do
 	case "$choice" in
 		i*|I*)
 			clear;
+			depcheck_funct;
 			if ls /usr/bin/ | grep -q ntopng; then
 				echo;
 				echo "Ntopng is already installed on your system, please uninstall it first if needed. ";
@@ -307,7 +314,8 @@ do
 				/usr/bin/geoiplookup6 \
 				/usr/lib/libGeoIP.so* \
 				rm -rfv /etc/rc.d/rc?.d/???ntopng \
-				rm -rfv /etc/rc.d/rc?.d/???redis;
+				rm -rfv /etc/rc.d/rc?.d/???redis \
+				rm -rfv /usr/lib/mysql/libmysqlclient.so.15;
 				userdel ntopng;
 				find /etc/fcron.* -type f -name "geoip_ntopngDEV_updater.sh" -exec rm -vf {} \;
 				echo ;
