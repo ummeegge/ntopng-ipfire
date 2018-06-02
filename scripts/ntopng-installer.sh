@@ -317,8 +317,7 @@ do
 				/usr/bin/geoiplookup6 \
 				/usr/lib/libGeoIP.so* \
 				rm -rfv /etc/rc.d/rc?.d/???ntopng \
-				rm -rfv /etc/rc.d/rc?.d/???redis \
-				rm -rfv /usr/lib/mysql/libmysqlclient.so.15;
+				rm -rfv /etc/rc.d/rc?.d/???redis;
 				userdel ntopng;
 				find /etc/fcron.* -type f -name "geoip_ntopngDEV_updater.sh" -exec rm -vf {} \;
 				echo ;
