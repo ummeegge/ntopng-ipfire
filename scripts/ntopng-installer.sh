@@ -1,39 +1,40 @@
-#!/bin/bash
+#!/bin/bash -x
 
 #
 # Description: In- uninstaller and updater for ntopng on IPFire platforms for 32 and 64 bit systems.
-# Installer includes also installation of redis, json-c, Geoip-api-c and zeroMQ
+# Installer includes also installation of redis, json-c, Geoip-api-c, mysql perl modules and zeroMQ.
 #
-# $author ummeegge web de ; $date: 23.11.2017 12:58:42
+# $author ummeegge ipfire org ; $date: 23.06.2017 07:33:34
 ####################################################################################################
 #
 
 # Install directory
 INSTALLDIR="/opt/pakfire/tmp";
-DEV="v5";
+DEV="3.2_v7";
 
 # Download address
 URL="https://people.ipfire.org/~ummeegge/ntopng/";
 # Packages
-#32bit
-PACKAGEA="ntopng-32bit_${DEV}_dev.tar.gz";
-PACKAGESUMA="ff08028fa7c98b1c1ccb5e29a3ed087e33603f3165538bd30542a76a0b50ffe7";
 # 64bit
-PACKAGEB="ntopng-64bit_${DEV}_dev.tar.gz";
-PACKAGESUMB="3bfa19759f9f9555ed020b2beb4ae2b90a0b2eb2e47c4c597f828d9564880ad5";
+PACKAGEA="ntopng-64bit${DEV}.tar.gz";
+PACKAGESUMA="d04ce0384e7fcc7bfa1dd7468c114e254ea7511ac236c24e5284920439dd693e";
+# 32bit
+PACKAGEB="ntopng-32bit_${DEV}.tar.gz";
+PACKAGESUMB="ae8548dd1b9eb2ae34531fe2a5b54dacd2c1d2973ac55ec542878290af932a91";
 
 # Platform check
 TAR="tar xvf";
 TYPE=$(uname -m | tail -c 3);
-ACTVERSION=$(curl -s ${URL} --list-only | awk -F'-' '/SHA/ { print $2 }');
-INSTALLEDVER=$(ntopng -V | head -1 | awk '{ print $1 }');
+ACTVERSION=$(curl -s ${URL} --list-only | awk -F'_' '/ntopng-/ { print $2 }');
+INSTALLEDVER=$(ntopng -V | head -1 | awk '{ print $1 }' | sed 's/v.//');
 
 # Packages
-GE="geoip-api-c-1.6.11-1.ipfire";
-JS="json-c-json-c-0.13-20171207-1.ipfire";
-NT="ntopng-3.3.180128-2.ipfire";
-RE="redis-4.0.6-1.ipfire";
+GE="geoip-api-c-1.6.12-1.ipfire";
+JS="json-c-0.13.1-1.ipfire";
+NT="ntopng-3.2-4.ipfire";
+RE="redis-4.0.10-1.ipfire";
 ZE="zeromq-4.2.3-1.ipfire";
+MY="mysql-5.6.40-1.ipfire";
 
 # Formatting Colors and text
 COLUMNS="$(tput cols)";
@@ -60,7 +61,7 @@ clean_up() {
 download_function() {
 	cd /tmp || exit 1;
 	# Check for 32-bit system
-	if [[ "${TYPE}" = "86" ]]; then
+	if [[ "${TYPE}" = "64" ]]; then
 		# Check if package is already presant otherwise download it
 		if [[ ! -e "${PACKAGEA}" ]]; then
 			echo;
@@ -82,7 +83,7 @@ download_function() {
 				exit 1;
 			fi
 		fi
-	elif [[ ${TYPE} = "64" ]]; then
+	elif [[ ${TYPE} = "86" ]]; then
 		# Check if package is already presant otherwise download it
 		if [[ ! -e "${PACKAGEB}" ]]; then
 			echo;
@@ -101,6 +102,9 @@ download_function() {
 				echo;
 				echo -e "${R}Shit happens :-( the SHA256 sum is incorrect, please report this here https://forum.ipfire.org/viewtopic.php?f=50&t=19565${N}";
 				echo;
+				echo;
+				echo "${R}Sorry this platform is currently not supported... Need to quit... ${N}";
+				echo;
 				exit 1;
 			fi
 		fi
@@ -116,9 +120,9 @@ download_function() {
 # Installation function of basic components
 install_function() {
 	cd /tmp || exit 1;
-	cp ntopng-*_${DEV}_dev.tar.gz ${INSTALLDIR};
+	cp ntopng-*_${DEV}.tar.gz ${INSTALLDIR};
 	cd ${INSTALLDIR};
-	tar xvfz ntopng-*_${DEV}_dev.tar.gz;
+	tar xvfz ntopng-*_${DEV}.tar.gz;
 	${TAR} ${ZE};
 	./install.sh;
 	${TAR} ${GE};
@@ -126,6 +130,8 @@ install_function() {
 	${TAR} ${JS};
 	./install.sh;
 	${TAR} ${RE};
+	./install.sh;
+	${TAR} ${MY};
 	./install.sh;
 	${TAR} ${NT};
 	./install.sh;
@@ -136,7 +142,7 @@ install_function() {
 update_check() {
 	if [ -e "/usr/bin/ntopng" ]; then
 		if [ "${ACTVERSION}" != "${INSTALLEDVER}" ]; then
-			echo -e "${B}There is an Update to ${ACTVERSION} available${N}";
+			echo -e "${B}There is an Update available${N}";
 		else
 			echo "${R}No update available${N}";
 		fi
@@ -146,9 +152,9 @@ update_check() {
 # Update function
 update_function() {
 	cd /tmp || exit 1;
-	cp ntopng-*_${DEV}_dev.tar.gz ${INSTALLDIR};
+	cp ntopng-*_${DEV}.tar.gz ${INSTALLDIR};
 	cd ${INSTALLDIR};
-	tar xvfz ntopng-*_${DEV}_dev.tar.gz;
+	tar xvfz ntopng-*_${DEV}.tar.gz;
 	${TAR} ${ZE};
 	./update.sh;
 	${TAR} ${GE};
@@ -157,18 +163,11 @@ update_function() {
 	./update.sh;
 	${TAR} ${RE};
 	./update.sh;
+	${TAR} ${MY};
+	./install.sh;
 	${TAR} ${NT};
 	./update.sh;
-	if ls /usr/lib | grep -q mysql; then
-		ln -s /usr/lib/mysql/libmysqlclient.so.15 /usr/lib/libmysqlclient.so.15
-	fi
 	clean_up;
-}
-
-depcheck_funct() {
-	if ls /usr/lib | grep -q mysql; then
-		ln -s /usr/lib/mysql/libmysqlclient.so.15 /usr/lib/libmysqlclient.so.15
-	fi
 }
 
 ## Installer Menu
@@ -199,7 +198,6 @@ do
 	case "$choice" in
 		i*|I*)
 			clear;
-			depcheck_funct;
 			if ls /usr/bin/ | grep -q ntopng; then
 				echo;
 				echo "Ntopng is already installed on your system, please uninstall it first if needed. ";
@@ -316,7 +314,8 @@ do
 				/usr/bin/geoiplookup \
 				/usr/bin/geoiplookup6 \
 				/usr/lib/libGeoIP.so* \
-				rm -rfv /etc/rc.d/rc?.d/???ntopng \
+				/usr/lib/libmysqlclient.so.18*;
+				rm -rfv /etc/rc.d/rc?.d/???ntopng;
 				rm -rfv /etc/rc.d/rc?.d/???redis;
 				userdel ntopng;
 				find /etc/fcron.* -type f -name "geoip_ntopngDEV_updater.sh" -exec rm -vf {} \;
@@ -378,6 +377,7 @@ do
 			echo "   Ooops, there went something wrong 8-\ - for explanation again   ";
 			echo "-------------------------------------------------------------------";
 			echo "             To install ntopng press    'i' and [ENTER]";
+			echo "             To uninstall ntopng press  'r' and [ENTER]";
 			echo "             To uninstall ntopng press  'u' and [ENTER]";
 			echo;
 			read -p " To start the installer again press [ENTER] , to quit use [CTRL-c]";
