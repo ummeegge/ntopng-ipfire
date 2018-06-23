@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 #
 # Description: In- uninstaller and updater for ntopng on IPFire platforms for 32 and 64 bit systems.
