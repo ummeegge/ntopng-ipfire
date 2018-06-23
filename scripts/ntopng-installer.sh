@@ -25,7 +25,7 @@ PACKAGESUMB="ae8548dd1b9eb2ae34531fe2a5b54dacd2c1d2973ac55ec542878290af932a91";
 # Platform check
 TAR="tar xvf";
 TYPE=$(uname -m | tail -c 3);
-ACTVERSION=$(curl -s ${URL} --list-only | awk -F'_' '/ntopng-/ { print $2 } | head -1');
+ACTVERSION=$(curl -s ${URL} --list-only | awk -F'_' '/ntopng-/ { print $2 }' | head -1);
 INSTALLEDVER=$(ntopng -V | head -1 | awk '{ print $1 }' | sed 's/v.//');
 
 # Packages
