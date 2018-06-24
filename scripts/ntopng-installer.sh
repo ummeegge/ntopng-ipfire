@@ -10,7 +10,7 @@
 
 # Install directory
 INSTALLDIR="/opt/pakfire/tmp";
-DEV="3.3.180313_v7";
+DEV="3.3.180624_v7";
 
 # Download address
 URL="https://people.ipfire.org/~ummeegge/ntopng/";
