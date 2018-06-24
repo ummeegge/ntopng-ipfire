@@ -17,10 +17,10 @@ URL="https://people.ipfire.org/~ummeegge/ntopng/";
 # Packages
 # 64bit
 PACKAGEA="ntopng-64bit_${DEV}.tar.gz";
-PACKAGESUMA="a41dcf21847ebac35539a444bcb1ba7ffd76dfe5ae138aa692faf427df115d62";
+PACKAGESUMA="fb5a799d8649f53e64d69813d5b8ed744a6f1bd19de4744fa08f1906fd94cd01";
 # 32bit
 PACKAGEB="ntopng-32bit_${DEV}.tar.gz";
-PACKAGESUMB="dd44bd17070b541dc495417c372fd35a90b40835e0d53f049b96e2afd37b3803";
+PACKAGESUMB="05eb4c48ff64c6e8ff6479d4c5f329fb907eb63ae300b9f0e4879a807ff5e520";
 
 # Platform check
 TAR="tar xvf";
