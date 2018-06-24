@@ -16,7 +16,7 @@ DEV="3.3.180624_v7";
 URL="https://people.ipfire.org/~ummeegge/ntopng/";
 # Packages
 # 64bit
-PACKAGEA="ntopng-64bit${DEV}.tar.gz";
+PACKAGEA="ntopng-64bit_${DEV}.tar.gz";
 PACKAGESUMA="a41dcf21847ebac35539a444bcb1ba7ffd76dfe5ae138aa692faf427df115d62";
 # 32bit
 PACKAGEB="ntopng-32bit_${DEV}.tar.gz";
