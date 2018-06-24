@@ -233,7 +233,7 @@ usr/share/ntopng/httpdocs/other/EtherOUI.txt
 usr/share/ntopng/httpdocs/other/TimeZones.txt
 usr/share/ntopng/httpdocs/other/trackers.txt
 #usr/share/ntopng/httpdocs/ssl
-#usr/share/ntopng/httpdocs/ssl/README
+usr/share/ntopng/httpdocs/ssl/README
 usr/share/ntopng/httpdocs/ssl/ntopng-cert.pem.dummy
 #usr/share/ntopng/httpdocs/templates
 usr/share/ntopng/httpdocs/templates/modal_confirm_dialog.html
@@ -267,7 +267,6 @@ usr/share/ntopng/scripts/callbacks/user_scripts/loader.lua
 usr/share/ntopng/scripts/callbacks/user_scripts/periodic/default.lua
 #usr/share/ntopng/scripts/locales
 usr/share/ntopng/scripts/locales/en.lua
-usr/share/ntopng/scripts/locales/it.lua
 #usr/share/ntopng/scripts/lua
 usr/share/ntopng/scripts/lua/API.lua
 usr/share/ntopng/scripts/lua/about.lua
@@ -391,6 +390,7 @@ usr/share/ntopng/scripts/lua/local_hosts_stats.lua
 usr/share/ntopng/scripts/lua/login.lua
 usr/share/ntopng/scripts/lua/logout.lua
 usr/share/ntopng/scripts/lua/mac_details.lua
+usr/share/ntopng/scripts/lua/mac_pkt_distro.lua
 usr/share/ntopng/scripts/lua/mac_stats.lua
 usr/share/ntopng/scripts/lua/macs_stats.lua
 #usr/share/ntopng/scripts/lua/modules

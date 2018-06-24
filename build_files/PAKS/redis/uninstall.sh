@@ -23,10 +23,6 @@
 #
 . /opt/pakfire/lib/functions.sh
 NAME="redis";
-stop_service ${NAME}
-#extract_backup_includes
-#make_backup ${NAME}
-#remove_files
 
 /etc/init.d/${NAME} stop;
 

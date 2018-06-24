@@ -24,7 +24,7 @@
 
 include Config
 
-VER        = 3.3.180128
+VER        = 3.3.180313
 
 THISAPP    = ntopng-$(VER)
 DL_FILE    = $(THISAPP).tar.gz
@@ -32,7 +32,7 @@ DL_FROM    = $(URL_IPFIRE)
 DIR_APP    = $(DIR_SRC)/$(THISAPP)
 TARGET     = $(DIR_INFO)/$(THISAPP)
 PROG       = ntopng
-PAK_VER    = 2
+PAK_VER    = 3
 
 DEPS       = "redis json-c zeromq geoip-api-c"
 
@@ -40,13 +40,13 @@ DEPS       = "redis json-c zeromq geoip-api-c"
 # Top-level Rules
 ###############################################################################
 
-objects = $(DL_FILE) nDPI-2.2.180128.tar.gz
+objects = $(DL_FILE) nDPI-2.2.180313.tar.gz
 
 $(DL_FILE)			= $(DL_FROM)/$(DL_FILE)
-nDPI-2.2.180128.tar.gz		= $(DL_FROM)/nDPI-2.2.180128.tar.gz
+nDPI-2.2.180313.tar.gz		= $(DL_FROM)/nDPI-2.2.180313.tar.gz
 
-$(DL_FILE)_MD5			= 521ed50e0f36afa3f74a704b86c656e5
-nDPI-2.2.180128.tar.gz_MD5	= cfc467c4a41f920fb378cb2b40ca68a7
+$(DL_FILE)_MD5			= d04d8f5f83ae30c41ddbf52b80f91db9
+nDPI-2.2.180313.tar.gz_MD5	= 88ed726b296e6fc3d327d1dc508e1074
 
 install : $(TARGET)
 
@@ -79,7 +79,7 @@ $(subst %,%_MD5,$(objects)) :
 $(TARGET) : $(patsubst %,$(DIR_DL)/%,$(objects))
 	@$(PREBUILD)
 	# build nDPI
-	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/nDPI-2.2.180128.tar.gz
+	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/nDPI-2.2.180313.tar.gz
 	# Change version number only for stable versions
 	#mv $(DIR_SRC)/nDPI-* $(DIR_SRC)/nDPI
 	cd $(DIR_SRC)/nDPI && ./autogen.sh

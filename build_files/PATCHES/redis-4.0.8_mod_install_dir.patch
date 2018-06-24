@@ -1,0 +1,119 @@
+diff -Nur redis-4.0.8.orig/deps/hiredis/Makefile redis-4.0.8/deps/hiredis/Makefile
+--- redis-4.0.8.orig/deps/hiredis/Makefile	2018-02-19 10:35:00.499587614 +0000
++++ redis-4.0.8/deps/hiredis/Makefile	2018-02-19 10:37:40.463340860 +0000
+@@ -15,7 +15,7 @@
+ HIREDIS_SONAME=$(shell grep HIREDIS_SONAME hiredis.h | awk '{print $$3}')
+ 
+ # Installation related variables and target
+-PREFIX?=/usr/local
++PREFIX?=/usr
+ INCLUDE_PATH?=include/hiredis
+ LIBRARY_PATH?=lib
+ PKGCONF_PATH?=pkgconfig
+diff -Nur redis-4.0.8.orig/deps/jemalloc/bin/jeprof.in redis-4.0.8/deps/jemalloc/bin/jeprof.in
+--- redis-4.0.8.orig/deps/jemalloc/bin/jeprof.in	2018-02-19 10:35:00.503587508 +0000
++++ redis-4.0.8/deps/jemalloc/bin/jeprof.in	2018-02-19 10:39:26.764518752 +0000
+@@ -89,7 +89,7 @@
+   #"otool" => "otool",         # equivalent of objdump on OS X
+ );
+ # NOTE: these are lists, so you can put in commandline flags if you want.
+-my @DOT = ("dot");          # leave non-absolute, since it may be in /usr/local
++my @DOT = ("dot");          # leave non-absolute, since it may be in /usr
+ my @GV = ("gv");
+ my @EVINCE = ("evince");    # could also be xpdf or perhaps acroread
+ my @KCACHEGRIND = ("kcachegrind");
+diff -Nur redis-4.0.8.orig/deps/jemalloc/configure redis-4.0.8/deps/jemalloc/configure
+--- redis-4.0.8.orig/deps/jemalloc/configure	2018-02-19 10:35:00.503587508 +0000
++++ redis-4.0.8/deps/jemalloc/configure	2018-02-19 10:41:53.864613505 +0000
+@@ -565,7 +565,7 @@
+ #
+ # Initializations.
+ #
+-ac_default_prefix=/usr/local
++ac_default_prefix=/usr
+ ac_clean_files=
+ ac_config_libobj_dir=.
+ LIBOBJS=
+@@ -2512,7 +2512,7 @@
+ 
+ 
+ if test "x$prefix" = "xNONE" ; then
+-  prefix="/usr/local"
++  prefix="/usr"
+ fi
+ if test "x$exec_prefix" = "xNONE" ; then
+   exec_prefix=$prefix
+diff -Nur redis-4.0.8.orig/deps/jemalloc/configure.ac redis-4.0.8/deps/jemalloc/configure.ac
+--- redis-4.0.8.orig/deps/jemalloc/configure.ac	2018-02-19 10:35:00.503587508 +0000
++++ redis-4.0.8/deps/jemalloc/configure.ac	2018-02-19 10:38:59.337246897 +0000
+@@ -67,7 +67,7 @@
+ 
+ dnl Munge install path variables.
+ if test "x$prefix" = "xNONE" ; then
+-  prefix="/usr/local"
++  prefix="/usr"
+ fi
+ if test "x$exec_prefix" = "xNONE" ; then
+   exec_prefix=$prefix
+diff -Nur redis-4.0.8.orig/deps/lua/etc/lua.pc redis-4.0.8/deps/lua/etc/lua.pc
+--- redis-4.0.8.orig/deps/lua/etc/lua.pc	2018-02-19 10:35:00.511587296 +0000
++++ redis-4.0.8/deps/lua/etc/lua.pc	2018-02-19 10:37:58.522861412 +0000
+@@ -8,7 +8,7 @@
+ R= 5.1.5
+ 
+ # grep '^INSTALL_.*=' ../Makefile | sed 's/INSTALL_TOP/prefix/'
+-prefix= /usr/local
++prefix= /usr
+ INSTALL_BIN= ${prefix}/bin
+ INSTALL_INC= ${prefix}/include
+ INSTALL_LIB= ${prefix}/lib
+diff -Nur redis-4.0.8.orig/deps/lua/Makefile redis-4.0.8/deps/lua/Makefile
+--- redis-4.0.8.orig/deps/lua/Makefile	2018-02-19 10:35:00.511587296 +0000
++++ redis-4.0.8/deps/lua/Makefile	2018-02-19 10:38:15.274416688 +0000
+@@ -9,7 +9,7 @@
+ 
+ # Where to install. The installation starts in the src and doc directories,
+ # so take care if INSTALL_TOP is not an absolute path.
+-INSTALL_TOP= /usr/local
++INSTALL_TOP= /usr
+ INSTALL_BIN= $(INSTALL_TOP)/bin
+ INSTALL_INC= $(INSTALL_TOP)/include
+ INSTALL_LIB= $(INSTALL_TOP)/lib
+diff -Nur redis-4.0.8.orig/deps/lua/src/luaconf.h redis-4.0.8/deps/lua/src/luaconf.h
+--- redis-4.0.8.orig/deps/lua/src/luaconf.h	2018-02-19 10:35:00.515587190 +0000
++++ redis-4.0.8/deps/lua/src/luaconf.h	2018-02-19 10:38:34.621903046 +0000
+@@ -94,7 +94,7 @@
+ 	".\\?.dll;"  LUA_CDIR"?.dll;" LUA_CDIR"loadall.dll"
+ 
+ #else
+-#define LUA_ROOT	"/usr/local/"
++#define LUA_ROOT	"/usr"
+ #define LUA_LDIR	LUA_ROOT "share/lua/5.1/"
+ #define LUA_CDIR	LUA_ROOT "lib/lua/5.1/"
+ #define LUA_PATH_DEFAULT  \
+diff -Nur redis-4.0.8.orig/src/Makefile redis-4.0.8/src/Makefile
+--- redis-4.0.8.orig/src/Makefile	2018-02-19 10:35:00.515587190 +0000
++++ redis-4.0.8/src/Makefile	2018-02-19 10:42:26.247753790 +0000
+@@ -24,7 +24,7 @@
+ WARN=-Wall -W -Wno-missing-field-initializers
+ OPT=$(OPTIMIZATION)
+ 
+-PREFIX?=/usr/local
++PREFIX?=/usr
+ INSTALL_BIN=$(PREFIX)/bin
+ INSTALL=install
+ 
+diff -Nur redis-4.0.8.orig/utils/redis_init_script redis-4.0.8/utils/redis_init_script
+--- redis-4.0.8.orig/utils/redis_init_script	2018-02-19 10:35:00.531586765 +0000
++++ redis-4.0.8/utils/redis_init_script	2018-02-19 10:42:56.338954922 +0000
+@@ -4,8 +4,8 @@
+ # as it does use of the /proc filesystem.
+ 
+ REDISPORT=6379
+-EXEC=/usr/local/bin/redis-server
+-CLIEXEC=/usr/local/bin/redis-cli
++EXEC=/usr/bin/redis-server
++CLIEXEC=/usr/bin/redis-cli
+ 
+ PIDFILE=/var/run/redis_${REDISPORT}.pid
+ CONF="/etc/redis/${REDISPORT}.conf"

@@ -24,6 +24,7 @@
 
 CONF="/etc/redis";
 BCK="/tmp/redis_bck";
+DB="/var/redis/6379";
 
 . /opt/pakfire/lib/functions.sh
 
@@ -31,12 +32,14 @@ BCK="/tmp/redis_bck";
 mkdir -p ${BCK};
 # Save redis config
 cp -rv ${CONF}/redis.conf ${BCK};
+cp -rv ${DB}/dump.rdb ${BCK};
 
 ./uninstall.sh
 ./install.sh
 
 # Recover redis configuration
 mv ${BCK}/redis.conf ${CONF};
+mv ${BCK}/dump.rdb ${DB};
 # Delete temporary backup dir
 rm -rf ${BCK};
 
@@ -44,4 +47,3 @@ rm -rf ${BCK};
 /etc/init.d/redis restart
 
 # EOF
-

@@ -1,8 +1,8 @@
-usr/bin/curve_keygen
+#usr/bin/curve_keygen
 #usr/include/zmq.h
 #usr/include/zmq_utils.h
 #usr/lib/libzmq.la
-usr/lib/libzmq.so
+#usr/lib/libzmq.so
 usr/lib/libzmq.so.5
 usr/lib/libzmq.so.5.1.3
 #usr/lib/pkgconfig/libzmq.pc

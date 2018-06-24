@@ -225,6 +225,7 @@ if pidof -x "ntopng" >/dev/null; then
     echo;
 else
     echo "${R}Process can´t be started please come to https://forum.ipfire.org/viewtopic.php?f=50&t=19565 , try then to help you.${N}";
+    sleep 5;
 fi
 
 # EOF
