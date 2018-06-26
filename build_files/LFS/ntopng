@@ -24,7 +24,7 @@
 
 include Config
 
-VER        = 3.3.180313
+VER        = 3.4.230618
 
 THISAPP    = ntopng-$(VER)
 DL_FILE    = $(THISAPP).tar.gz
@@ -32,21 +32,21 @@ DL_FROM    = $(URL_IPFIRE)
 DIR_APP    = $(DIR_SRC)/$(THISAPP)
 TARGET     = $(DIR_INFO)/$(THISAPP)
 PROG       = ntopng
-PAK_VER    = 3
+PAK_VER    = 4
 
-DEPS       = "redis json-c zeromq geoip-api-c"
+DEPS       = "redis json-c zeromq geoip-api-c mysql"
 
 ###############################################################################
 # Top-level Rules
 ###############################################################################
 
-objects = $(DL_FILE) nDPI-2.2.180313.tar.gz
+objects = $(DL_FILE) nDPI-2.2.2.230618.tar.gz
 
 $(DL_FILE)			= $(DL_FROM)/$(DL_FILE)
-nDPI-2.2.180313.tar.gz		= $(DL_FROM)/nDPI-2.2.180313.tar.gz
+nDPI-2.2.2.230618.tar.gz	= $(DL_FROM)/nDPI-2.2.2.230618.tar.gz
 
-$(DL_FILE)_MD5			= d04d8f5f83ae30c41ddbf52b80f91db9
-nDPI-2.2.180313.tar.gz_MD5	= 88ed726b296e6fc3d327d1dc508e1074
+$(DL_FILE)_MD5			= 6a7115edc05fc2fe4ddfabd902f7f62a
+nDPI-2.2.2.230618.tar.gz_MD5	= 9bbebeb3c487c528639f4000fd37dda7
 
 install : $(TARGET)
 
@@ -79,7 +79,7 @@ $(subst %,%_MD5,$(objects)) :
 $(TARGET) : $(patsubst %,$(DIR_DL)/%,$(objects))
 	@$(PREBUILD)
 	# build nDPI
-	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/nDPI-2.2.180313.tar.gz
+	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/nDPI-2.2.2.230618.tar.gz
 	# Change version number only for stable versions
 	#mv $(DIR_SRC)/nDPI-* $(DIR_SRC)/nDPI
 	cd $(DIR_SRC)/nDPI && ./autogen.sh
@@ -90,6 +90,8 @@ $(TARGET) : $(patsubst %,$(DIR_DL)/%,$(objects))
 	cd $(DIR_SRC)/nDPI && make $(MAKETUNING)
 
 	@rm -rf $(DIR_APP) && cd $(DIR_SRC) && tar zxf $(DIR_DL)/$(DL_FILE)
+	cd $(DIR_SRC)/ntopng && patch -Np1 < $(DIR_SRC)/src/patches/ntopng-3.4_timeseriesexporter.patch
+
 	cd $(DIR_SRC)/ntopng && ./autogen.sh
 	cd $(DIR_SRC)/ntopng && ./configure	\
 		--prefix=/usr			\
