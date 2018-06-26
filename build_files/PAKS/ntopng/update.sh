@@ -22,13 +22,13 @@
 ############################################################################
 #
 
+. /opt/pakfire/lib/functions.sh
+
 NTOPCONF="/etc/ntopng";
 NTOPDB="/var/nst";
 BCK="/tmp/ntopng_bck";
 CERT="/usr/share/ntopng/httpdocs/ssl";
 GEOIP="/usr/share/ntopng/httpdocs/geoip";
-
-. /opt/pakfire/lib/functions.sh
 
 # Stop services
 /etc/init.d/ntopng stop && /etc/init.d/redis stop;

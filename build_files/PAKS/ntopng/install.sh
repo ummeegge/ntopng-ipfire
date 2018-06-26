@@ -32,7 +32,6 @@ if pidof -x "ntopng" >/dev/null; then
 fi
 
 extract_files
-restore_backup ${NAME}
 
 # Formatting and Colors
 COLUMNS="$(tput cols)";
