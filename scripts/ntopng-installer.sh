@@ -10,17 +10,17 @@
 
 # Install directory
 INSTALLDIR="/opt/pakfire/tmp";
-DEV="3.3.180624_v7";
+DEV="3.4.230618_v8";
 
 # Download address
 URL="https://people.ipfire.org/~ummeegge/ntopng/";
 # Packages
 # 64bit
 PACKAGEA="ntopng-64bit_${DEV}.tar.gz";
-PACKAGESUMA="fb5a799d8649f53e64d69813d5b8ed744a6f1bd19de4744fa08f1906fd94cd01";
+PACKAGESUMA="ea538787f9a987fc6ea4a9476f14ad55d1d5870b2833e74c440d2ba8ad892eca";
 # 32bit
 PACKAGEB="ntopng-32bit_${DEV}.tar.gz";
-PACKAGESUMB="05eb4c48ff64c6e8ff6479d4c5f329fb907eb63ae300b9f0e4879a807ff5e520";
+PACKAGESUMB="af1754818b45a208b69c26acb6866935c7a4b10218f14f03f6aec0df98adbdcc";
 
 # Platform check
 TAR="tar xvf";
@@ -31,7 +31,7 @@ INSTALLEDVER=$(ntopng -V | head -1 | awk '{ print $1 }' | sed 's/v.//');
 # Packages
 GE="geoip-api-c-1.6.12-1.ipfire";
 JS="json-c-0.13.1-1.ipfire";
-NT="ntopng-3.3.180313-3.ipfire";
+NT="ntopng-3.4.230618-5.ipfire";
 RE="redis-4.0.8-1.ipfire";
 ZE="zeromq-4.2.3-1.ipfire";
 MY="mysql-5.6.40-1.ipfire";
